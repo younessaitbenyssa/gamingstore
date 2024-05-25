@@ -98,7 +98,6 @@ session_start();
                 $ins->setFetchMode(PDO::FETCH_ASSOC); 
                 $ins->execute(array($idp));
                 $tablo = $ins->fetchAll();
-                // $table = array_unique($tablo);
                 foreach ($tablo as $varo){
                     $brdname = $varo['brandname'];
                     echo "
@@ -152,7 +151,7 @@ session_start();
                     $i = 1;
                     foreach ($table as $vari){
                         $lenom = urlencode($vari['productname']);
-                        $leprix = number_format($vari['price'], 2);
+                        $leprix = number_format($vari['price'], 2,'.','');
                         $lelink = urlencode($vari['imglink']);
                         $id=$vari["prdid"];
                     echo "
@@ -182,7 +181,7 @@ session_start();
                     $i = 1;
                     foreach ($table as $vari){
                         $lenom = urlencode($vari['productname']);
-                        $leprix = number_format($vari['price'], 2);
+                        $leprix = number_format($vari['price'], 2,'.','');
                         $lelink = urlencode($vari['imglink']);
                         $id=$vari["prdid"];
                     echo "

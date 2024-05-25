@@ -99,9 +99,7 @@ fetch('./script2.php')
     return response.json();
   })
   .then(data => {
-     
     console.log(data);
-     
     cart=data;
     displaycart2();
 
@@ -261,11 +259,13 @@ function removeFromCartTable(index){
 
 // ////add to cart in page
 function addtocart(index, name, prix, link) {
-    
+    console.log(index);
+    console.log(name);
+    console.log(prix);
+    console.log(link);
     var nom = decodeURIComponent(name.replace(/\+/g, ' '));
     var links = decodeURIComponent(link.replace(/\+/g, ' '));
     const existingitem=cart.find(item=>item.id===index);
-
     if(existingitem){
         existingitem.quantity++;
         let existOBJ=({
@@ -394,6 +394,9 @@ rangeinput.forEach(input =>{
          
     });
 });
+
+
+
 // var filter=[];
 // function render_filtred_products(filter) {
 //     console.log(filter);

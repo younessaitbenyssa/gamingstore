@@ -2038,10 +2038,6 @@ input[type="range"]::-webkit-slider-thumb{
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-\[repeat\(auto-fit\2c minmax\(200px\2c 1fr\)\)\]{
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-}
-
 .grid-rows-3{
   grid-template-rows: repeat(3, minmax(0, 1fr));
 }
@@ -2092,10 +2088,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .gap-6{
   gap: 1.5rem;
-}
-
-.gap-\[30px\]{
-  gap: 30px;
 }
 
 .overflow-hidden{
