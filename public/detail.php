@@ -37,7 +37,7 @@ session_start();
 ?>
 <body class="bg-[rgb(49,49,49)] overflow-x-hidden">
     <nav class="navba fixed top-0 text-white flex justify-between items-center bg-[rgba(0,0,0,0.8)] p-4 w-screen z-10">
-        <img class="relative top-0 left-0 w-[70px] h-[50px]" src="images/logo.png" alt="">
+    <a href="./hover.html"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
         <div class="flex gap-10 font-medium">
             <a class="niv" href="">Home</a>
             <a class="niv" href="">About</a>
@@ -59,6 +59,15 @@ session_start();
         $idp = $_GET['idcat'];
         $idbr = $_GET['idbrand'];
         $idnor = $_GET['menu'];
+        if ($idnor != 0){
+            $minpr = $_GET['min_price'];
+            $maxpr = $_GET['max_price'];
+            $_SESSION['min'] = $minpr;
+            $_SESSION['max'] = $maxpr;
+        }else{
+            $_SESSION['min'] = 2500;
+            $_SESSION['max'] = 7500;
+        }
         try{ 
             $pdo  = new PDO("mysql:host=localhost;dbname=electronicsstore","root","");
             } 
@@ -114,22 +123,22 @@ session_start();
         <div class="pricees flex mt-7 mb-2 w-[80%] justify-between mx-auto">
            <div class="inputss">
                <span class="text-white mr-2">Min</span>
-               <input type="number" name="min_price"  class="prix-enred text-white min_input w-[50%] bg-transparent rounded-lg border border-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36] pl-2 h-8" value="2500">
+               <input type="number" name="min_price"  class="prix-enred text-white min_input w-[50%] bg-transparent rounded-lg border border-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36] pl-2 h-8" value="<?php echo $_SESSION['min']; ?>">
            </div>
             
            <div class="inputss">
                <span class="text-white mr-2 ">Max</span>
-               <input type="number" name="max_price"  class="prix-enred text-white w-[50%] bg-transparent rounded-lg border-[1px] border-solid border-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36] pl-2 h-8" value="7500">  
+               <input type="number" name="max_price"  class="prix-enred text-white w-[50%] bg-transparent rounded-lg border-[1px] border-solid border-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36] pl-2 h-8" value="<?php echo $_SESSION['max']; ?>">  
            </div>
             </div>
               <div class="slider h-[5px] rounded-[5px] left-8 mt-9 bg-[#ddd] relative w-4/5">
-                  <div id="progreeee" class="progress h-[5px] left-[25%] right-[25%] absolute  rounded-[5px] bg-[#EBDD36] ">
+                  <div id="progreeee" class="progress h-[5px]  absolute  rounded-[5px] bg-[#EBDD36] ">
 
                   </div>
                </div>
                   <div class="range-input relative w-4/5 ml-[32px]">
-                   <input type="range" class="range-min absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000"  value="2500">
-                   <input type="range" class="range-max absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000"  value="7400">
+                   <input type="range" class="range-min absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000" id="rng-min" value="<?php echo $_SESSION['min']; ?>">
+                   <input type="range" class="range-max absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000"  id="rng-max" value="<?php echo $_SESSION['max']; ?>">
                   </div>
                 <input type="hidden" name="idcat" value="<?php echo $idp; ?>">
                 <input type="hidden" name="idbrand" value="<?php echo $idbr; ?>">
@@ -172,8 +181,6 @@ session_start();
                     $i++;
                     }
                 }else{
-                    $minpr = $_GET['min_price'];
-                    $maxpr = $_GET['max_price'];
                     $ins = $pdo->prepare("SELECT prdid, productname, price, imglink FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
                     $ins->setFetchMode(PDO::FETCH_ASSOC); 
                     $ins->execute(array($idp, $idbr, $minpr,$maxpr));

@@ -346,7 +346,6 @@ let gap_price=0;
 let input_field=document.querySelectorAll(".prix-enred");
 
 
-
 input_field.forEach(input => {
     input.addEventListener("input", e => {
         let minvaleur = parseInt(input_field[0].value),
@@ -358,16 +357,14 @@ input_field.forEach(input => {
         if (maxvaleur - minvaleur >= gap_price) {
             if (e.target.classList.contains("min_input")) {
                 rangeinput[0].value = minvaleur;
-                progresse.style.left = (minvaleur / rangeinput[0].max) * 100 + "%";
+                updateProgress(); 
             } else {
                 rangeinput[1].value = maxvaleur;
-                progresse.style.right = (100 - (maxvaleur / rangeinput[1].max) * 100) + "%";
+                updateProgress(); 
            }
         }  
     });
 });
-
-
 
 rangeinput.forEach(input =>{
     input.addEventListener("input",e=>{
@@ -387,13 +384,101 @@ rangeinput.forEach(input =>{
         else{
             input_field[0].value=minvaleur;
             input_field[1].value=maxvaleur;
-            progresse.style.left=(minvaleur/rangeinput[0].max)*100 +"%";
-            progresse.style.right=(100-(maxvaleur/rangeinput[1].max)*100 +"%");
-        }
-       
-         
+            updateProgress(); 
+        }  
+        
     });
 });
+
+
+
+
+
+
+
+
+function updateProgress() {
+    let minvaleur = parseInt(rangeinput[0].value);
+    let maxvaleur = parseInt(rangeinput[1].value);
+    let range = maxvaleur - minvaleur;
+    let totalRange = parseInt(rangeinput[1].max) - parseInt(rangeinput[0].min);
+    let progressLeft = (minvaleur - parseInt(rangeinput[0].min)) / totalRange * 100;
+    let progressRight = 100 - ((maxvaleur - parseInt(rangeinput[0].min)) / totalRange * 100);
+
+    progresse.style.left = progressLeft + "%";
+    progresse.style.right = progressRight + "%";
+}
+
+
+// input_field.forEach(input => {
+//     input.addEventListener("input", e => {
+//         let minvaleur = parseInt(input_field[0].value);
+//         let maxvaleur = parseInt(input_field[1].value);
+
+//         if (maxvaleur > 10000) {
+//             maxvaleur = 10000;
+//         }
+//         if (maxvaleur - minvaleur >= gap_price) {
+//             if (e.target.classList.contains("min_input")) {
+//                 rangeinput[0].value = minvaleur;
+//             } else {
+//                 rangeinput[1].value = maxvaleur;
+//             }
+//             updateProgress();
+//         }
+//     });
+// });
+
+
+
+// rangeinput.forEach(input => {
+//     input.addEventListener("input", e => {
+//         let minvaleur = parseInt(rangeinput[0].value);
+//         let maxvaleur = parseInt(rangeinput[1].value);
+//         if (maxvaleur > 10000) {
+//             rangeinput[1].value = 10000;
+//         }
+//         if (maxvaleur - minvaleur < gap_price) {
+//             if (e.target.className === "range-min") {
+//                 rangeinput[0].value = maxvaleur - gap_price;
+//             } else {
+//                 rangeinput[1].value = minvaleur + gap_price;
+//             }
+//         }
+//         updateProgress();
+//     });
+// });
+updateProgress();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function updateRangeSlider(minValue, maxValue) {
+//     // Update range input values without triggering input event
+//     rangeinput[0].value = document.getElementById("rng-min").value;
+//     rangeinput[1].value = document.getElementById("rng-max").value;
+
+//     // Update visual representation if needed (like progress bar)
+//     progresse.style.left = (minValue / rangeinput[0].max) * 100 + "%";
+//     progresse.style.right = (100 - (maxValue / rangeinput[1].max) * 100) + "%";
+// }
+
+
 
 
 
