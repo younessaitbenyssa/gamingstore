@@ -93,75 +93,10 @@
              </div>
             <div class="overflow-y-auto h-[400px] no-scrollbar mr-2">
                 <?php
-try {
-    
-    $pdo = new PDO("mysql:host=localhost;dbname=electronicsstore", "root", "");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-     
-    $query = "
-        SELECT 
-            products.productname AS name,
-            products.price AS price,
-            products.imglink AS imagelink,
-            cart.quantity AS quantity,
-            cart.product_cart_id AS id_cart
-        FROM 
-            products
-        JOIN 
-            cart ON products.prdid = cart.product_cart_id;
-    ";
-
-     
-    $statement = $pdo->query($query);
-
-     
-    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    $total=0;
-    foreach ($result as $vari) {
-        $prix=number_format($vari['price'],2)*$vari['quantity'];
-        echo '
-        <div class="panier_product_confirm flex justify-between ml-16 bg-[rgba(255,255,255,0.2)] mt-2 rounded-[10px]">
-        <div class="product_img_title flex gap-1 mt-4 w-6/12 ">
-            <div class="w-[60px] h-[55px]">
-                <img src="./images/' . htmlspecialchars($vari['imagelink']) . '" class="w-[50px] h-[50px] rounded-lg" alt="">
-            </div>
-            <div class="title_panier_confirm mt-2">
-                <p class="text-white text-xl">
-                    ' . htmlspecialchars($vari['name']) . '
-                </p>
-            </div>
-        </div>
-        <div class="w-3/12">
-              <p class= "quntite text-[#EBDD36] text-xl mt-6">
-
-              *' . htmlspecialchars($vari['quantity']) . '
-              </p>
-        </div>
-        <div class="prix_confirm mt-2 w-3/12 ">
-            <h4 class="text-white text-xl mt-3">$' . number_format($prix,2). '</h4>
-        </div>
-
-         <div>
-          
-         </div>
-        </div>';
-        $total=$total+$prix;
-    }
-    echo '<div class="shipping flex justify-between mt-5">
-            <div class="text-white font-semibold text-md ml-20">Shipping</div>
-            <div class="text-white text-xl mr-[12%]">$40</div>
-         
-        </div>';
-    echo '<div class="total flex justify-between mt-5">
-             <div class="text-[#EBDD36]  text-2xl font-bold ml-20">Total</div>
-            <div class="text-white text-xl font-bold mr-[12%]">$'.number_format($total+40, 2).'</div>
-         
-        </div>';
-} catch (PDOException $e) {
-    echo 'Error: ' . $e->getMessage();
-}
-?>
+                    include './classes/product.php';
+                    $paymentpage = new ProductOperations(0,0);
+                    $paymentpage->displayPrdPaymnt();
+                ?>
             
     </div>
         </div>
@@ -171,9 +106,3 @@ try {
     <script src="./payment.js"></script>
 </body>
 </html>
-
-
-
-
-
-

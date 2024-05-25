@@ -1269,10 +1269,6 @@ input[type="range"]::-webkit-slider-thumb{
   left: 22%;
 }
 
-.left-\[25\%\]{
-  left: 25%;
-}
-
 .left-\[26\%\]{
   left: 26%;
 }
@@ -1339,10 +1335,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .right-0{
   right: 0px;
-}
-
-.right-\[25\%\]{
-  right: 25%;
 }
 
 .top-0{

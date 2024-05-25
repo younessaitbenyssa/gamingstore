@@ -59,6 +59,8 @@ session_start();
         $idp = $_GET['idcat'];
         $idbr = $_GET['idbrand'];
         $idnor = $_GET['menu'];
+        include './classes/product.php';
+        $dispromotion  = new ProductOperations($idp,$idbr);
         if ($idnor != 0){
             $minpr = $_GET['min_price'];
             $maxpr = $_GET['max_price'];
@@ -68,20 +70,10 @@ session_start();
             $_SESSION['min'] = 2500;
             $_SESSION['max'] = 7500;
         }
-        try{ 
-            $pdo  = new PDO("mysql:host=localhost;dbname=electronicsstore","root","");
-            } 
-        catch(PDOException $e){ 
-            echo $e->getMessage(); 
-            }
     ?>
          <div class="flex flex-col justify-center items-center">
             <?php
-                $nameis = $pdo->prepare("SELECT categorie FROM category where id = ?");
-                $nameis->setFetchMode(PDO::FETCH_ASSOC);
-                $nameis->execute(array($idp));
-                $tab = $nameis->fetch();
-                echo "<h3 class='text-4xl px-auto font-bold '>Gaming ".$value = $tab['categorie']."</h3>"
+                $dispromotion->displaycategoryname();
             ?>
          </div>
     </div>
@@ -89,8 +81,7 @@ session_start();
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <?php
-                include 'promotions.php';
-                dispromo($idp);
+                $dispromotion->dispromo();
             ?>
         </div>
         <div class="swiper-button-next soldbtn"><i class="fa-solid fa-chevron-right"></i></div>
@@ -102,20 +93,7 @@ session_start();
                <h3 class="text-white text-4xl font-semibold">Brand</h3>
             </div>
             <?php
-                $ins = $pdo->prepare("SELECT DISTINCT brandname from brand INNER JOIN products ON brand.brand_id = products.brand_id 
-                                    where products.categorie = ?");
-                $ins->setFetchMode(PDO::FETCH_ASSOC); 
-                $ins->execute(array($idp));
-                $tablo = $ins->fetchAll();
-                foreach ($tablo as $varo){
-                    $brdname = $varo['brandname'];
-                    echo "
-                    <div class='mt-5 ml-[6%]'>
-                    <input type='checkbox' class=' bg-transparent rounded-[3px] border-white   accent-[#EBDD36]' />
-                    <span class='text-white hover:text-[#EBDD36] text-xl  mt-1'>".$brdname."</span>
-                </div>
-                    ";
-                }
+                $dispromotion->displayfilerbrands();
             ?>
           <div class="ml-[6%]  mt-6">
            <h4 class="text-white text-4xl font-semibold">Price</h4>
@@ -153,61 +131,9 @@ session_start();
            <div class='products'>
                 <?php
                 if ($idnor == 0){
-                    $ins = $pdo->prepare("SELECT prdid, productname,price,imglink FROM products where categorie = ? AND brand_id = ?");
-                    $ins->setFetchMode(PDO::FETCH_ASSOC); 
-                    $ins->execute(array($idp,$idbr));
-                    $table = $ins->fetchAll();
-                    $i = 1;
-                    foreach ($table as $vari){
-                        $lenom = urlencode($vari['productname']);
-                        $leprix = number_format($vari['price'], 2,'.','');
-                        $lelink = urlencode($vari['imglink']);
-                        $id=$vari["prdid"];
-                    echo "
-                    <div class='prdcnt'>
-                        <div class='produit'>
-                        <img src='images/".$vari['imglink']."'  class='prdimg'>
-                        </div>
-                        <h1>".$vari['productname']."</h1>
-                        <h2>".$leprix." MAD</h2>
-                        <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
-                            <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
-                                <span class='mt-1'>ADD TO CART</span>
-                                <i class='bx bx-cart-add'></i> 
-                            </div> 
-                        </button>
-                    </div>
-                    ";
-                    $i++;
-                    }
+                   $dispromotion->displayproducts();
                 }else{
-                    $ins = $pdo->prepare("SELECT prdid, productname, price, imglink FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
-                    $ins->setFetchMode(PDO::FETCH_ASSOC); 
-                    $ins->execute(array($idp, $idbr, $minpr,$maxpr));
-                    $table = $ins->fetchAll();
-                    $i = 1;
-                    foreach ($table as $vari){
-                        $lenom = urlencode($vari['productname']);
-                        $leprix = number_format($vari['price'], 2,'.','');
-                        $lelink = urlencode($vari['imglink']);
-                        $id=$vari["prdid"];
-                    echo "
-                    <div class='prdcnt'>
-                        <div class='produit'>
-                        <img src='images/".$vari['imglink']."'  class='prdimg'>
-                        </div>
-                        <h1>".$vari['productname']."</h1>
-                        <h2>".$leprix." MAD</h2>
-                        <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
-                            <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
-                                <span class='mt-1'>ADD TO CART</span>
-                                <i class='bx bx-cart-add'></i> 
-                            </div> 
-                        </button>
-                    </div>
-                    ";
-                    $i++;
-                    }
+                    $dispromotion->displayfiltredproducts($minpr,$maxpr);
                 }
                     ?>
             </div>
