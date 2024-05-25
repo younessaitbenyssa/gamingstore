@@ -72,35 +72,30 @@
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp,$this->idbr));
             $table = $ins->fetchAll();
-            $i = 1;
-            foreach ($table as $vari){
-                $lenom = urlencode($vari['productname']);
-                $leprix = number_format($vari['price'], 2,'.','');
-                $lelink = urlencode($vari['imglink']);
-                $id=$vari["prdid"];
-            echo "
-            <div class='prdcnt'>
-                <div class='produit'>
-                <img src='images/".$vari['imglink']."'  class='prdimg'>
-                </div>
-                <h1>".$vari['productname']."</h1>
-                <h2>".$leprix." MAD</h2>
-                <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
-                    <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
-                        <span class='mt-1'>ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div>
-            ";
-            $i++;
-            }
+            $this->productsdisplayt($table);
         }
         function displayfiltredproducts ($minpr,$maxpr){
             $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp, $this->idbr, $minpr,$maxpr));
             $table = $ins->fetchAll();
+            $this->productsdisplayt($table);
+        } 
+        function DisplayAll (){
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink FROM products limit 8 ");
+            $ins->setFetchMode(PDO::FETCH_ASSOC); 
+            $ins->execute();
+            $table = $ins->fetchAll();
+            $this->productsdisplayt($table);
+        }
+        function DisplayBrand ($idt){
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink FROM products where brand_id = ? limit 8");
+            $ins->setFetchMode(PDO::FETCH_ASSOC); 
+            $ins->execute(array($idt));
+            $table = $ins->fetchAll();
+            $this->productsdisplayt($table);
+        }
+        function productsdisplayt ($table){
             $i = 1;
             foreach ($table as $vari){
                 $lenom = urlencode($vari['productname']);
@@ -124,7 +119,7 @@
             ";
             $i++;
             }
-        }  
+        } 
         function displayPrdPaymnt (){
             $query = "
             SELECT 

@@ -476,7 +476,43 @@
 </div>
       </div>
 </section>
-<section class="h-screen"></section>
+<section class="h-screen">
+        <nav class="relative mt-[5%] text-white flex gap-10 text-xl left-[10%]">
+            <a href="#" id="all" class="visited:text-purple-600">TOUS</a>
+            <a href="#" id="hyperx">HYPERX</a>
+            <a href="#" id="logitech">LOGITECH</a>
+            <a href="#" id="razer">RAZER</a>
+            <a href="#" id="asus">ASUS</a>
+            <a href="#" id="sony">SONY</a>
+        </nav>
+    <iframe id="productIframe" class="w-screen h-full mt-[3%]" src="productsiframe.php?idt=0"></iframe>
+    </section>
+    <script>
+        document.getElementById('all').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productIframe').src = 'productsiframe.php?idt=0';
+        });
+        document.getElementById('hyperx').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productIframe').src = 'productsiframe.php?idt=5';
+        });
+        document.getElementById('logitech').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productIframe').src = 'productsiframe.php?idt=2';
+        });
+        document.getElementById('razer').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productIframe').src = 'productsiframe.php?idt=3';
+        });
+        document.getElementById('asus').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productIframe').src = 'productsiframe.php?idt=1';
+        });
+        document.getElementById('sony').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('productIframe').src = 'productsiframe.php?idt=4';
+        });
+    </script>
 <script src="script.js"></script>
 <script src="swiper-bundle.min.js"></script>
   <script>

@@ -37,7 +37,7 @@ session_start();
 ?>
 <body class="bg-[rgb(49,49,49)] overflow-x-hidden">
     <nav class="navba fixed top-0 text-white flex justify-between items-center bg-[rgba(0,0,0,0.8)] p-4 w-screen z-10">
-    <a href="./hover.html"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
+    <a href="./hover.php"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
         <div class="flex gap-10 font-medium">
             <a class="niv" href="">Home</a>
             <a class="niv" href="">About</a>
