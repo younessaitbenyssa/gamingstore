@@ -36,21 +36,9 @@
 session_start();
 ?>
 <body class="bg-[rgb(49,49,49)] overflow-x-hidden">
-    <nav class="navba fixed top-0 text-white flex justify-between items-center bg-[rgba(0,0,0,0.8)] p-4 w-screen z-10">
-    <a href="./hover.php"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
-        <div class="flex gap-10 font-medium">
-            <a class="niv" href="">Home</a>
-            <a class="niv" href="">About</a>
-            <a class="niv" href="">Contact</a>
-            <a class="niv" href="">Products</a>
-            <a class="niv" href="">Services</a>
-        </div>
-        <div class="flex mr-6 gap-6">
-            <i class='bx bx-search m-auto'></i>
-            <i class='bx bx-user m-auto'></i>
-            <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
-        </div>
-    </nav>
+    <?php
+        include 'nav.php';
+    ?>
     <div class="color_back container flex flex-col justify-center items-center   w-10/12 h-[300px] relative left-[8%] mt-[10%]">
          <div class="image_categoris w-[110px] h-[110px]   mb-4 rounded-md flex justify-center items-center">
             <img src="images/BENGOO_G9000_black_casque.png" alt="" class="imog h-[120px] w-[120px]">
@@ -138,16 +126,7 @@ session_start();
                     ?>
             </div>
         </div>
-        <div class="fixed right-0 top-0 cart w-[31%] bg-[rgba(60,60,60)] h-screen  flex flex-col p-5 z-50" id="mycart">
-            <i class="fa-solid fa-x" onclick="hidecart()"></i>
-            <div id="cartItem" class="overflow-y-auto mt-5 no-scrollbar"></div>
-            <div class="width-[90%] border-[2px] border-solid border-white mt-2"></div>
-            <div class="flex justify-between text-white mt-2 text-xl">
-                <h3>Totale</h3>
-                <h2 id="totale">$0.00</h2>
-            </div>
-            <button id="commander" class="bg-[#EBDD36] text-white w-[90%] h-10 mt-auto rounded-2xl ml-auto mr-auto">Commander</button>
-        </div>
+        <?php include './DisplayCartInPages.php' ;?>  
     </div>
 <script src="script.js"></script>
 <script src="swiper-bundle.min.js"></script>

@@ -120,18 +120,18 @@
 </head>
 <body class="overflow-x-hidden bg-[rgb(49,49,49)]">
     <nav class="navba fixed top-0 text-white flex justify-between items-center p-4 w-screen z-50 duration-300" id="nvbar">
-        <a href="./hover.html"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
+        <a href="./hover.php"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
         <div class="flex gap-10 font-medium">
             <a class="niv" href="">Home</a>
             <a class="niv" href="">About</a>
             <a class="niv" href="">Contact</a>
             <a class="niv" href="">Products</a>
-            <a class="niv" href="services.html">Services</a>
+            <a class="niv" href="services.php">Services</a>
         </div>
         <div class="flex mr-6 gap-6">
-            <i class='bx bx-search'></i>
-            <i class='bx bx-cart-alt'></i>
-            <i class='bx bx-user'></i>
+            <i class='bx bx-search m-auto'></i>
+            <i class='bx bx-user m-auto'></i>
+            <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
             <!-- <img src="images/sony headphones/casque2.png" alt=""> -->
         </div>
     </nav>
@@ -143,7 +143,7 @@
         <h1 class="ft absolute top-[27%] left-[42%] text-white text-9xl z-10">dp</h1>
         <div class="absolute h-[1px] w-[240px] bg-white top-[69%] left-[57%] z-20"></div>
         <div class="absolute h-[1px] w-[78px] bg-white top-[73%] left-[74%] z-20 rotate-[42deg]"></div>
-        <div class="absolute h-10 w-10 top-[66%] left-[55%] border-solid border-[1px] rounded-[50%] z-50">
+        <div class="absolute h-10 w-10 top-[66%] left-[55%] border-solid border-[1px] rounded-[50%] z-30">
             <div class="relative w-6 h-6 border-solid border-[1px] rounded-[50%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                 <div class="relative w-4 h-4 bg-white rounded-[50%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] drop-shadow-[0px_0px_8px_rgb(255,223,0)]">
                 </div>
@@ -151,7 +151,7 @@
         </div>
         <div class="absolute h-[1px] w-[280px] bg-white top-[51%] left-[22%] z-20 "></div>
         <div class="absolute h-[1px] w-[62px] bg-white top-[54%] left-[18%] z-20 -rotate-[39deg]"></div>
-        <div class="absolute h-10 w-10 top-[48%] left-[41%] border-solid border-[1px] rounded-[50%] z-50">
+        <div class="absolute h-10 w-10 top-[48%] left-[41%] border-solid border-[1px] rounded-[50%] z-30">
             <div class="relative w-6 h-6 border-solid border-[1px] rounded-[50%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                 <div class="relative w-4 h-4 bg-white rounded-[50%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] drop-shadow-[0px_0px_8px_rgb(255,223,0)]">
                 </div>
@@ -159,7 +159,7 @@
         </div>
         <div class="absolute h-[1px] w-40 bg-white top-[14%] left-[57%]"></div>
         <div class="absolute h-[1px] w-[111px] bg-white top-[20%] left-[50%] -rotate-[44deg]"></div>
-        <div class="absolute h-10 w-10 top-[22%] left-[50%] border-solid border-[1px] rounded-[50%] z-50">
+        <div class="absolute h-10 w-10 top-[22%] left-[50%] border-solid border-[1px] rounded-[50%] z-30">
             <div class="relative w-6 h-6 border-solid border-[1px] rounded-[50%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                 <div class="relative w-4 h-4 bg-white rounded-[50%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] drop-shadow-[0px_0px_8px_rgb(255,223,0)]">
                 </div>
@@ -477,8 +477,8 @@
       </div>
 </section>
 <section class="h-screen">
-        <nav class="relative mt-[5%] text-white flex gap-10 text-xl left-[10%]">
-            <a href="#" id="all" class="visited:text-purple-600">TOUS</a>
+        <nav class="naviframe relative mt-[5%] text-white flex gap-10 text-xl left-[10%]">
+            <a href="#" id="all">TOUS</a>
             <a href="#" id="hyperx">HYPERX</a>
             <a href="#" id="logitech">LOGITECH</a>
             <a href="#" id="razer">RAZER</a>
@@ -487,30 +487,41 @@
         </nav>
     <iframe id="productIframe" class="w-screen h-full mt-[3%]" src="productsiframe.php?idt=0"></iframe>
     </section>
+    <?php  include './DisplayCartInPages.php'  ?>
     <script>
-        document.getElementById('all').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('productIframe').src = 'productsiframe.php?idt=0';
-        });
-        document.getElementById('hyperx').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('productIframe').src = 'productsiframe.php?idt=5';
-        });
-        document.getElementById('logitech').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('productIframe').src = 'productsiframe.php?idt=2';
-        });
-        document.getElementById('razer').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('productIframe').src = 'productsiframe.php?idt=3';
-        });
-        document.getElementById('asus').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('productIframe').src = 'productsiframe.php?idt=1';
-        });
-        document.getElementById('sony').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('productIframe').src = 'productsiframe.php?idt=4';
+        const links = document.querySelectorAll('.naviframe a');
+        const iframe = document.getElementById('productIframe');
+        document.getElementById('all').classList.add('active');
+        links.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                links.forEach(link => link.classList.remove('active'));
+                
+                this.classList.add('active');
+
+                switch (this.id) {
+                    case 'all':
+                        iframe.src = 'productsiframe.php?idt=0';
+                        break;
+                    case 'hyperx':
+                        iframe.src = 'productsiframe.php?idt=1';
+                        break;
+                    case 'logitech':
+                        iframe.src = 'productsiframe.php?idt=2';
+                        break;
+                    case 'razer':
+                        iframe.src = 'productsiframe.php?idt=3';
+                        break;
+                    case 'asus':
+                        iframe.src = 'productsiframe.php?idt=4';
+                        break;
+                    case 'sony':
+                        iframe.src = 'productsiframe.php?idt=5';
+                        break;
+                    default:
+                        iframe.src = '';
+                }
+            });
         });
     </script>
 <script src="script.js"></script>
@@ -518,7 +529,7 @@
   <script>
     window.addEventListener("scroll",function(){
         var header = document.getElementById("nvbar");
-        header.classList.toggle("sticky",window.scrollY > 0)
+        header.classList.toggle("sticky",window.scrollY > 0);
     })
     
     var swiper = new Swiper(".mySwiper", {

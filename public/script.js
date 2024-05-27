@@ -323,11 +323,15 @@ displaycart();
  
  
 function hidecart(){
+    let x = document.getElementById("bigshadow");
+    x.style.display = "none";
     let hd = document.getElementById("mycart");
     hd.classList.remove("cartappear");
     hd.classList.add("cartanim");
 }
 function appearcart(){
+    let x = document.getElementById("bigshadow");
+    x.style.display = "block";
     let hd = document.getElementById("mycart");
     hd.classList.remove("cartanim")
     hd.classList.add("cartappear");

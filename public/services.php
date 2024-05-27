@@ -10,24 +10,7 @@
     <title>services</title>
 </head>
 <body class="bg-[rgb(49,49,49)]">
-
-    <nav class="navba fixed top-0 text-white flex justify-between items-center bg-[rgba(0,0,0,0.8)] p-4 w-screen z-10">
-        <img class="relative top-0 left-0 w-[70px] h-[50px]" src="images/logo.png" alt="">
-        <div class="flex gap-10 font-medium">
-            <a class="niv" href="./hover.html">Home</a>
-            <a class="niv" href="">About</a>
-            <a class="niv" href="">Contact</a>
-            <a class="niv" href="">Products</a>
-            <a class="niv" href="">Services</a>
-        </div>
-        <div class="flex mr-6 gap-6">
-            <i class='bx bx-search m-auto'></i>
-            <i class='bx bx-user m-auto'></i>
-            <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
-        </div>
-    </nav>
-
-
+   <?php require './nav.php'?>
     <div class="our_services flex justify-around w-11/12 ml-10">
         <div class="services_describe  w-1/3 mt-36 ml-11">
             <div >
@@ -106,18 +89,11 @@
                </a> 
             </div>
           </div>
-
-
-
           
-           
-
-
-
-
         </div>
 
     </div>
+     <?php require './DisplayCartInPages.php' ?>
     <script src="./script.js"> </script>
 </body>
 </html>
