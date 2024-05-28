@@ -1685,6 +1685,10 @@ input[type="range"]::-webkit-slider-thumb{
   margin-top: 10%;
 }
 
+.mt-\[20px\]{
+  margin-top: 20px;
+}
+
 .mt-\[3\%\]{
   margin-top: 3%;
 }
@@ -1695,6 +1699,10 @@ input[type="range"]::-webkit-slider-thumb{
 
 .mt-\[6\%\]{
   margin-top: 6%;
+}
+
+.mt-\[9px\]{
+  margin-top: 9px;
 }
 
 .mt-auto{
@@ -2090,6 +2098,10 @@ input[type="range"]::-webkit-slider-thumb{
 
 .gap-12{
   gap: 3rem;
+}
+
+.gap-2{
+  gap: 0.5rem;
 }
 
 .gap-5{
