@@ -345,7 +345,7 @@ function appearcart(){
 //filter 
 
 const rangeinput=document.querySelectorAll(".range-input input"),
-progresse=document.querySelector("#progreeee");
+progresse = document.querySelector("#progreeee");
 let gap_price=0;
 let input_field=document.querySelectorAll(".prix-enred");
 

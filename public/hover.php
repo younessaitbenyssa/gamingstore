@@ -100,9 +100,7 @@
             width: 80%;
             /* padding: 20px; */
         }
-
-
-        .swipslideproproduct{
+        .promoappearsatall{
             overflow: hidden;
         }
         .soldbtn{
@@ -119,6 +117,10 @@
     </style>
 </head>
 <body class="overflow-x-hidden bg-[rgb(49,49,49)]">
+    <?php 
+        require './classes/product.php' ;
+        $allaboutprd = new ProductOperations(0,0);
+    ?>
     <nav class="navba fixed top-0 text-white flex justify-between items-center p-4 w-screen z-50 duration-300" id="nvbar">
         <a href="./hover.php"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
         <div class="flex gap-10 font-medium">
@@ -305,103 +307,9 @@
     <h1 class="take text-center text-4xl mt-20 font-semibold text-white">Take advantages of our promotions</h1>
 <div class="swiper myproductsswip">
         <div class="swiper-wrapper sldwrpprd mx-auto">
-            <div class="swiper-slide swipslideproproduct">
-                <div class="prdcnt">
-                    <div class="absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3">Sold</div>
-                    <div class="produit">
-                    <img src="images/Redragon_M908_mouse_black.png" alt="" class="prdimg">
-                    </div>
-                    <h1>Redgragon M908</h1>
-                    <h2>$70.00</h2>
-                    <button class="bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden" onmouseover="carteffect(7)" onmouseleave="carteffectmove(7)" onclick="addtocart(7)">
-                        <div class="flex flex-col cartanimatio" id="cartspan7">
-                            <span class="mt-1">ADD TO CART</span>
-                            <i class='bx bx-cart-add'></i> 
-                        </div> 
-                    </button>
-                </div>
-            </div>
-        <div class="swiper-slide swipslideproproduct">
-            <div class="prdcnt">
-                <div class="absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3">Sold</div>
-                <div class="produit">
-                <img src="images/razer-basilisk-v3-souris.png" alt="" class="prdimg">
-                </div>
-                <h1>Razer Basilisk v3</h1>
-                <h2>$200.00</h2>
-                <button class="bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden" onmouseover="carteffect(8)" onmouseleave="carteffectmove(8)" onclick="addtocart(8)">
-                    <div class="flex flex-col cartanimatio" id="cartspan8">
-                        <span class="mt-1">ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div>
-        </div>
-        <div class="swiper-slide swipslideproproduct">
-            <div class="prdcnt">  
-                <div class="absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3">Sold</div> 
-                <div class="produit">
-                <img src="images/headphone_back.png" alt="" class="prdimg">
-                </div>
-                <h1>Cooler Master MH751
-                </h1>
-                <h2>$60.00</h2>
-                <button class="bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden" onmouseover="carteffect(2)" onmouseleave="carteffectmove(2)" onclick="addtocart(2)">
-                    <div class="flex flex-col cartanimatio" id="cartspan2">
-                        <span class="mt-1">ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div>
-        </div>
-        <div class="swiper-slide swipslideproproduct">
-            <div class="prdcnt">
-                <div class="absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3">Sold</div>
-                <div class="produit">
-                <img src="images/controller.png" alt="" class="prdimg">
-                </div>
-                <h1>Logitech Gamepad F310</h1>
-                <h2>$30.00</h2>
-                <button class="bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden" onmouseover="carteffect(3)" onmouseleave="carteffectmove(3)" onclick="addtocart(3)">
-                    <div class="flex flex-col cartanimatio" id="cartspan3">
-                        <span class="mt-1">ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div>
-        </div>
-        <div class="swiper-slide swipslideproproduct">
-            <div class="prdcnt">
-                <div class="absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3">Sold</div>
-                <div class="produit">
-                <img src="images/seat.png" alt="" class="prdimg">
-                </div>
-                <h1>Hybrok Fighter Rouge</h1>
-                <h2>$600.00</h2>
-                <button class="bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden" onmouseover="carteffect(4)" onmouseleave="carteffectmove(4)" onclick="addtocart(4)">
-                    <div class="flex flex-col cartanimatio" id="cartspan4">
-                        <span class="mt-1">ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div> 
-        </div>
-        <div class="swiper-slide swipslideproproduct">
-            <div class="prdcnt">
-                <div class="absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3">Sold</div>
-                <div class="produit">
-                <img src="images/monitor.png" alt="" class="prdimg">
-                </div>
-                <h1>ASUS ProArt PA27AC 27"</h1>
-                <h2>$800.00</h2>
-                <button class="bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden" onmouseover="carteffect(5)" onmouseleave="carteffectmove(5)" onclick="addtocart(5)">
-                    <div class="flex flex-col cartanimatio" id="cartspan5">
-                        <span class="mt-1">ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div>  
-        </div>
+            <?php  
+                 $allaboutprd->dispromoAll() ; 
+            ?>
         </div>
         <div class="swiper-button-next soldbtn"><i class="fa-solid fa-chevron-right"></i></div>
         <div class="swiper-button-prev soldbtn"><i class="fa-solid fa-chevron-left"></i></div>  
@@ -504,7 +412,7 @@
                         iframe.src = 'productsiframe.php?idt=0';
                         break;
                     case 'hyperx':
-                        iframe.src = 'productsiframe.php?idt=1';
+                        iframe.src = 'productsiframe.php?idt=5';
                         break;
                     case 'logitech':
                         iframe.src = 'productsiframe.php?idt=2';
@@ -513,10 +421,10 @@
                         iframe.src = 'productsiframe.php?idt=3';
                         break;
                     case 'asus':
-                        iframe.src = 'productsiframe.php?idt=4';
+                        iframe.src = 'productsiframe.php?idt=1';
                         break;
                     case 'sony':
-                        iframe.src = 'productsiframe.php?idt=5';
+                        iframe.src = 'productsiframe.php?idt=4';
                         break;
                     default:
                         iframe.src = '';

@@ -28,5 +28,13 @@
                     $ifrmprd->DisplayBrand($idt);
             ?>
         </div>
+    <script>
+        document.querySelectorAll('.prdcnt').forEach(function(product) {
+            product.addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                window.top.location.href = 'productDescription.php?id=' + productId;
+            });
+        });
+    </script>
 </body>
 </html>

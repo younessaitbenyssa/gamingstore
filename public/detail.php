@@ -16,7 +16,7 @@
       height: 30%;
       /* transform: translate(-50%,-50%); */
     }
-    .swiper-slide{
+    .promoappearsatall{
         overflow: hidden;
     }
     .soldbtn{
@@ -103,8 +103,8 @@ session_start();
                   </div>
                </div>
                   <div class="range-input relative w-4/5 ml-[32px]">
-                   <input type="range" class="range-min absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000" id="rng-min" value="<?php echo $_SESSION['min']; ?>">
-                   <input type="range" class="range-max absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000"  id="rng-max" value="<?php echo $_SESSION['max']; ?>">
+                   <input type="range" class="range-min absolute top-[-5px] h-[5px] w-full hover:cursor-pointer" name="range_min" min="0" max="10000" id="rng-min" value="<?php echo $_SESSION['min']; ?>">
+                   <input type="range" class="range-max absolute top-[-5px] h-[5px] w-full hover:cursor-pointer" name="range_min" min="0" max="10000"  id="rng-max" value="<?php echo $_SESSION['max']; ?>">
                   </div>
                 <input type="hidden" name="idcat" value="<?php echo $idp; ?>">
                 <input type="hidden" name="idbrand" value="<?php echo $idbr; ?>">
