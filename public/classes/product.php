@@ -17,7 +17,7 @@
         function dispromo(){
             $ins = $this->pdo->prepare("
                                 SELECT 
-                                productname,
+                                productname,prdid,id,categorie,
                                 products.price AS price,
                                 promotions.newprice AS promoprice,
                                 imglink 
@@ -27,41 +27,23 @@
                         $ins->setFetchMode(PDO::FETCH_ASSOC); 
                         $ins->execute(array($this->idp));
                         $table = $ins->fetchAll();
-                        $this->Mypromotions($table);
+                        foreach ($table as $var){
+                            $prix =number_format($var['price'], 2); 
+                            $promoprix =number_format($var['promoprice'], 2);  
+                        echo 
+                        "<div class='swiper-slide'>
+                            <div class='prdcnt'>
+                                <div class='absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3'>Sold</div>
+                                <div class='produit'>
+                                <img src='images/".$var['imglink']."' class='prdimg'>
+                                </div>
+                                <h1>".$var['productname']."</h1>
+                                <h2 class = 'mb-[-20px]'><del>".$prix." MAD</del></h2>
+                                <h2>".$promoprix." MAD<h2>  
+                            </div>
+                        </div>";
+                        }
                     }
-        function dispromoAll(){
-            $ins = $this->pdo->prepare("
-                                SELECT 
-                                productname,
-                                products.price AS price,
-                                promotions.newprice AS promoprice,
-                                imglink 
-                                FROM products INNER JOIN promotions 
-                                ON products.prdid = promotions.id 
-                                ");
-                        $ins->setFetchMode(PDO::FETCH_ASSOC); 
-                        $ins->execute();
-                        $table = $ins->fetchAll();
-                        $this->Mypromotions($table);
-        }
-        function Mypromotions ($table){
-            foreach ($table as $var){
-                $prix =number_format($var['price'], 2); 
-                $promoprix =number_format($var['promoprice'], 2);  
-            echo 
-            "<div class='swiper-slide promoappearsatall'>
-                <div class='prdcnt'>
-                    <div class='absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3'>Sold</div>
-                    <div class='produit'>
-                    <img src='images/".$var['imglink']."' class='prdimg'>
-                    </div>
-                    <h1>".$var['productname']."</h1>
-                    <h2 class = 'mb-[-20px]'><del>".$prix." MAD</del></h2>
-                    <h2>".$promoprix." MAD<h2>  
-                </div>
-            </div>";
-            }
-        }
         function displaycategoryname(){
             $nameis = $this->pdo->prepare("SELECT categorie FROM category where id = ?");
             $nameis->setFetchMode(PDO::FETCH_ASSOC);
@@ -86,14 +68,36 @@
             }
         } 
         function displayproducts (){
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink FROM products where categorie = ? AND brand_id = ?");
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where categorie = ? AND brand_id = ?");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp,$this->idbr));
             $table = $ins->fetchAll();
-            $this->productsdisplayt($table);
+            $i = 1;
+            foreach ($table as $vari){
+                $lenom = urlencode($vari['productname']);
+                $leprix = number_format($vari['price'], 2,'.','');
+                $lelink = urlencode($vari['imglink']);
+                $id=$vari["prdid"];
+            echo "
+            <div class='prdcnt'>
+                <div class='produit'>
+                <img src='images/".$vari['imglink']."'  class='prdimg'>
+                </div>
+                <h1>".$vari['productname']."</h1>
+                <h2>".$leprix." MAD</h2>
+                <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
+                    <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
+                        <span class='mt-1'>ADD TO CART</span>
+                        <i class='bx bx-cart-add'></i> 
+                    </div> 
+                </button>
+            </div>
+            ";
+            $i++;
+            }
         }
         function displayfiltredproducts ($minpr,$maxpr){
-            $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
+            $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp, $this->idbr, $minpr,$maxpr));
             $table = $ins->fetchAll();
@@ -121,12 +125,15 @@
                 $lelink = urlencode($vari['imglink']);
                 $id=$vari["prdid"];
             echo "
+            
             <div class='prdcnt'>
+            <a href='description.php?idprd=". $vari['prdid']."&cate=".$vari['categorie']."'>
                 <div class='produit'>
                 <img src='images/".$vari['imglink']."'  class='prdimg'>
                 </div>
-                <h1>".$vari['productname']."</h1>
-                <h2>".$leprix." MAD</h2>
+                <h1 class='mt-[20px]'>".$vari['productname']."</h1>
+                <h2 class='mt-[9px]'>".$leprix." MAD</h2>
+                </a>
                 <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
                     <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
                         <span class='mt-1'>ADD TO CART</span>
@@ -134,6 +141,7 @@
                     </div> 
                 </button>
             </div>
+            
             ";
             $i++;
             }
@@ -196,5 +204,44 @@
                 
                 </div>';
         }
+
+        function description($id) {
+           
+            $statement = $this->pdo->prepare("SELECT productname, price, description, imglink FROM products WHERE prdid = :id");
+          
+            $statement->bindParam(":id", $id);
+         
+            $statement->execute();
+            
+            
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);    
+            return $result;
+        }
+       function similaieCategoProd($cate){
+        $statement = $this->pdo->prepare("SELECT productname, price, description, imglink,categorie,prdid FROM products WHERE categorie = :categ");
+          
+            $statement->bindParam(":categ",$cate);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);    
+            foreach ($result as $var){
+                $prix =number_format($var['price'], 2); 
+            
+            echo 
+            "<div class='swiper-slide'>
+               <a href='description.php?idprd=".$var['prdid']."&cate=".$var['categorie']."'>
+                <div class='prdcnt'>
+                     
+                    <div class='produit'>
+                    <img src='images/".$var['imglink']."' class='prdimg'>
+                    </div>
+                    <h1>".$var['productname']."</h1>
+                    <h2 class='text-[#EBDD36] text-lg font-bold'> ".$prix." MAD </h2>
+                       
+                </div>
+                </a>
+               
+            </div>";}
+
+       }
     }
 ?>
