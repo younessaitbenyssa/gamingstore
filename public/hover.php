@@ -131,6 +131,9 @@
         <div class="flex mr-6 gap-6">
             <i class='bx bx-search m-auto'></i>
             <i class='bx bx-user m-auto'></i>
+            <div >
+                <h3 class="mt-4">Sign in / sign up </h3>
+            </div>
             <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
             <!-- <img src="images/sony headphones/casque2.png" alt=""> -->
         </div>

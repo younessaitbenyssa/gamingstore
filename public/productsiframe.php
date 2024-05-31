@@ -15,6 +15,7 @@
 </head>
 <body class="bg-[rgb(49,49,49)] overflow-hidden h-screen flex justify-center items-center" >
     <?php
+         
         include './classes/product.php';
         $ifrmprd = new ProductOperations(0,0);
         $idt = $_GET['idt'];
@@ -28,5 +29,6 @@
                     $ifrmprd->DisplayBrand($idt);
             ?>
         </div>
+        <script src="./script.js"></script>
 </body>
 </html>

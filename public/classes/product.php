@@ -106,14 +106,14 @@
             $this->productsdisplayt($table);
         } 
         function DisplayAll (){
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink FROM products limit 8 ");
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8 ");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute();
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
         }
         function DisplayBrand ($idt){
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink FROM products where brand_id = ? limit 8");
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where brand_id = ? limit 8");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($idt));
             $table = $ins->fetchAll();
