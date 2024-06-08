@@ -125,7 +125,6 @@
           <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <?php
-        
                 $describe->similaieCategoProd($catego);
             ?>
         </div>

@@ -7,16 +7,18 @@
     <title>Document</title>
 </head>
 <body> 
- 
- 
-     <div class="back_signin py-14" >
+     
+    <div class="back_signin   overflow-hidden" >
+        <div class="w-full h-9">
+
+        </div>
         <div class="container mx-auto relative z-20 overflow-hidden   ">
            
             <div class="blurr flex flex-col  lg:flex-row  w-8/12  rounded-xl mx-auto overflow-hidden">
                  
                     
                 
-                <div class="image_side flex flex-col justify-center items-center  w-full lg:w-1/2 bg-no-repeat" style="background-image: url('../public/images/yellowcasque.jpeg');">
+                <div class="image_side   flex flex-col justify-center items-center   ml-[6px]   h-[550px]  w-full lg:w-1/2 bg-no-repeat" style="background-image: url('../public/images/yellowcasque.jpeg');">
                     <div>
                         <h1 class="font-semibold text-5xl text-white mb-2">WELCOME</h1>
                     </div>
@@ -27,41 +29,52 @@
                 </div>
                 
                 <div class="w-full  lg:w-1/2 py-16 px-12">
-                    <h2 class="text-3xl mb-4 pl-[100px] text-white">Sign up</h2>
-                    <p class="mb-4 text-white pl-[40px]">Create your account, it's free and fast</p>
+                    <h2 class="text-3xl mb-3 pl-[100px] text-white">Sign up</h2>
+                    <p class="mb-3 text-white pl-[40px]">Create your account, it's free and fast</p>
+                    <form action="./classes/client.php" method="post"> 
                     <div class="grid grid-cols-2 gap-5">
-                        
-                        <input type="text" class="border    text-white border-white py-1 px-2 bg-transparent rounded-[30px] placeholder:text-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" placeholder="Firstname">
                          
-                        <input type="text" class="border placeholder:text-white text-white border-white py-1 px-2 bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36] " placeholder="Family name">
+                        <input type="text" class="name_first  border    text-white border-white py-1 px-2 bg-transparent rounded-[30px] placeholder:text-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" placeholder="Firstname" name="Firstname">
+                         
+                        <input type="text" class="name_family  border placeholder:text-white text-white border-white py-1 px-2 bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36] " placeholder="Family name" name="Familyname">
                     </div>
-                    <div class="mt-4 ">
-                        <input type="text" placeholder="Address" class=" placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]">
+                    <div class="mt-3 ">
+                        <input type="text" placeholder="Address" class="adreess_client placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" name="Address">
                     </div>
-                    <div class="mt-4 ">
-                        <input type="email" placeholder="Email" class=" placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]">
+                    <div class="mt-3 ">
+                        <input type="email" placeholder="Email" id="cv" class="test_email placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" name="Email">
                     </div>
-                    <div class="mt-4 ">
-                        <input type="password" placeholder="password" class=" placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]">
+                    <!--      -->
+                    <div id="errrrror" class="email_exist bg-red-200 mt-2 rounded-[30px]">
+                        <p class="text-red-400 ml-2">Email already exist</p>
                     </div>
-                    <div class="mt-4 ">
-                        <input type="password" placeholder="confirm password" class=" placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]">
+                    <div class="mt-3 ">
+                        <input type="password" placeholder="password" class="pass placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" name="password">
                     </div>
-                    <div class="mt-4 ">
-                        <input type="checkbox"     class=" border-gray-400 focus:outline-none focus:outline-offset-0        rounded-lg bg-transparent  focus:border-[transparent] focus:outline-[transparent]  ">
+                    
+                    <div class="mt-3 ">
+                        <input type="password" placeholder="confirm password" class="pass_confirm placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" name="confirm_password">
+                    </div>
+                    <div id="password_check" class="pass_box bg-red-200 mt-1 rounded-[30px]">
+                        <p class="text-red-400 ml-2">Password doesn't match</p>
+                    </div>
+                    <div class="mt-3 ">
+                        <input type="checkbox"     class=" border-white focus:outline-none focus:outline-offset-0   text-[#EBDD36]    rounded-lg bg-transparent  focus:border-[transparent] focus:outline-[transparent]  ">
                         <span class=" text-white">I accept the <a href="#" class="text-[#EBDD36] font-semibold">Terms of Use</a> &  <a href="#" class="text-[#EBDD36] font-semibold">Privacy Policy</a> </span>
                     </div>
-                    <div class="mt-4">
-                        <button class="w-full bg-[#EBDD36] py-2 text-center text-white rounded-lg font-semibold">Sign up </button>
+                    <div class="mt-3">
+                        <button type="submit" name="signup" id="signbutt"    class="   w-full bg-[#EBDD36] hover:bg-yellow-400 py-2 text-center text-white rounded-lg font-semibold">Sign up </button>
                       </div>
-                      <!-- <div class="mt-4">
-                        <span class="text-white px-10">I already have an accout <a href="#" class="text-[#EBDD36] font-semibold hover:underline">Sign in</a></span>
-                      </div> -->
+                      <div class="mt-2">
+                        <span class="text-white px-10">I already have an accout <a href="./sign_in.html" class="text-[#EBDD36] font-semibold hover:underline">Sign in</a></span>
+                      </div>
                 </div>
-
+            </form>
             </div>
         </div>
      </div>
-       <script src="./script.js"></script>
+       
+       <script src="signup.js"></script>
+       
 </body>
 </html

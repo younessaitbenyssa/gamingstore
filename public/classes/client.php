@@ -140,4 +140,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['Login'])) {
     $customer_test->setPlainPassword($password_login);  
     $customer_test->test_exist_client();
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99

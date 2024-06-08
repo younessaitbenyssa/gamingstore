@@ -18,6 +18,7 @@
 
 <body class="bg-[rgb(49,49,49)] overflow-hidden h-screen flex justify-center items-center" >
     <?php
+         
         include './classes/product.php';
         // include './DisplayCartInPages.php';
         $ifrmprd = new ProductOperations(0,0);
@@ -32,6 +33,10 @@
                     $ifrmprd->DisplayBrand($idt);
             ?>
         </div>
+<<<<<<< HEAD
     <script src="script.js"></script>
+=======
+        <script src="./script.js"></script>
+>>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
 </body>
 </html>
