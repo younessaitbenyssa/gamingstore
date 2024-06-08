@@ -1,5 +1,4 @@
-  
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     
 
  
@@ -32,16 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     document.querySelector("#errrrror").classList.add("email_exist");
                 }
-                 
-            
+
+
               })
             .catch(error => {
                 console.error('Error:', error);
             });
     }
- 
 
- 
+
+
     let password = document.querySelector(".pass");
     let confirm_pass = document.querySelector(".pass_confirm");
     confirm_pass.addEventListener("blur",test_password);
@@ -57,11 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-   
+
 });
-
-
- 
- 
-
-

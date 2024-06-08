@@ -17,7 +17,8 @@
         function dispromo(){
             $ins = $this->pdo->prepare("
                                 SELECT 
-                                productname,prdid,id,categorie,
+                                products.prdid AS id,
+                                productname,
                                 products.price AS price,
                                 promotions.newprice AS promoprice,
                                 imglink 
@@ -27,25 +28,46 @@
                         $ins->setFetchMode(PDO::FETCH_ASSOC); 
                         $ins->execute(array($this->idp));
                         $table = $ins->fetchAll();
-                        foreach ($table as $var){
-                            $prix =number_format($var['price'], 2); 
-                            $promoprix =number_format($var['promoprice'], 2);  
-                        echo 
-                        "<div class='swiper-slide'>
-                        <a href='description.php?idprd=". $var['prdid']."&promoprice=".$var['promoprice']."&cate=".$var['categorie']."'>
-                            <div class='prdcnt'>
-                                <div class='absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3'>Sold</div>
-                                <div class='produit'>
-                                <img src='images/".$var['imglink']."' class='prdimg'>
-                                </div>
-                                <h1>".$var['productname']."</h1>
-                                <h2 class = 'mb-[-20px]'><del>".$prix." MAD</del></h2>
-                                <h2>".$promoprix." MAD<h2>  
-                            </div>
-                            </a>
-                        </div>";
-                        }
+                        $this->Mypromotions($table);
                     }
+        function dispromoAll(){
+            $ins = $this->pdo->prepare("
+                                SELECT 
+                                products.prdid AS id,
+                                productname,
+                                products.price AS price,
+                                promotions.newprice AS promoprice,
+                                imglink 
+                                FROM products INNER JOIN promotions 
+                                ON products.prdid = promotions.id 
+                                ");
+                        $ins->setFetchMode(PDO::FETCH_ASSOC); 
+                        $ins->execute();
+                        $table = $ins->fetchAll();
+                        $this->Mypromotions($table);
+        }
+        function Mypromotions ($table){
+            foreach ($table as $var){
+                $prix =number_format($var['price'], 2); 
+                $promoprix =number_format($var['promoprice'], 2);  
+            echo 
+            "
+            <div class='swiper-slide promoappearsatall'>
+            <a href = 'description.php?idprd=".$var['id']."&cate=".$this->idp."&promoprice=".$var['promoprice']."'>
+                <div class='prdcnt'>
+                    <div class='absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3'>Sold</div>
+                    <div class='produit'>
+                    <img src='images/".$var['imglink']."' class='prdimg'>
+                    </div>
+                    <h1>".$var['productname']."</h1>
+                    <h2 class = 'mb-[-20px]'><del>".$prix." MAD</del></h2>
+                    <h2>".$promoprix." MAD<h2>  
+                </div>
+            </a>
+            </div>
+            ";
+            }
+        }
         function displaycategoryname(){
             $nameis = $this->pdo->prepare("SELECT categorie FROM category where id = ?");
             $nameis->setFetchMode(PDO::FETCH_ASSOC);
@@ -74,29 +96,7 @@
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp,$this->idbr));
             $table = $ins->fetchAll();
-            $i = 1;
-            foreach ($table as $vari){
-                $lenom = urlencode($vari['productname']);
-                $leprix = number_format($vari['price'], 2,'.','');
-                $lelink = urlencode($vari['imglink']);
-                $id=$vari["prdid"];
-            echo "
-            <div class='prdcnt'>
-                <div class='produit'>
-                <img src='images/".$vari['imglink']."'  class='prdimg'>
-                </div>
-                <h1>".$vari['productname']."</h1>
-                <h2>".$leprix." MAD</h2>
-                <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
-                    <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
-                        <span class='mt-1'>ADD TO CART</span>
-                        <i class='bx bx-cart-add'></i> 
-                    </div> 
-                </button>
-            </div>
-            ";
-            $i++;
-            }
+            $this->productsdisplayt($table);
         }
         function displayfiltredproducts ($minpr,$maxpr){
             $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
@@ -106,6 +106,7 @@
             $this->productsdisplayt($table);
         } 
         function DisplayAll (){
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8");
             $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8 ");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute();
@@ -127,15 +128,12 @@
                 $lelink = urlencode($vari['imglink']);
                 $id=$vari["prdid"];
             echo "
-            
-            <div class='prdcnt'>
-            <a href='description.php?idprd=". $vari['prdid']."&cate=".$vari['categorie']."'>
+                <div class='prdcnt' data-id=".$id." data-cat=".$vari['categorie'].">
                 <div class='produit'>
                 <img src='images/".$vari['imglink']."'  class='prdimg'>
                 </div>
-                <h1 class='mt-[20px]'>".$vari['productname']."</h1>
-                <h2 class='mt-[9px]'>".$leprix." MAD</h2>
-                </a>
+                <h1>".$vari['productname']."</h1>
+                <h2>".$leprix." MAD</h2>
                 <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(".$i.")' onmouseleave='carteffectmove(".$i.")' onclick='addtocart($id,\"$lenom\",$leprix,\"$lelink\")'>
                     <div class='flex flex-col cartanimatio' id='cartspan".$i."'>
                         <span class='mt-1'>ADD TO CART</span>
@@ -143,7 +141,6 @@
                     </div> 
                 </button>
             </div>
-            
             ";
             $i++;
             }

@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
     <link rel="stylesheet" href="./styles.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/233edd5d97.js" crossorigin="anonymous"></script>
@@ -35,51 +34,36 @@
 </head>
 <body style="background-image: url('./images/back_ground\ -\ Copy.jpg');">
     <div class="fixed z-10 top-0 left-0 w-screen">
-    <nav class="navbar  h-24 bg-[rgba(0,0,0,0.8)] shadow text-white flex justify-between items-center">
-        <img class="relative top-0 left-0 w-[70px] h-[50px]" src="./images/logo.png" alt="">
-        <div class="flex gap-10 font-medium">
-            <a class="niv" href="">Home</a>
-            <a class="niv" href="">About</a>
-            <a class="niv" href="">Contact</a>
-            <a class="niv" href="">Products</a>
-            <a class="niv" href="">Services</a>
-        </div>
-        <div class="flex mr-6 gap-6">
-            <i class='bx bx-search'></i>
-            <i class='bx bx-cart-alt'></i>
-            <i class='bx bx-user'></i>
-        </div>
-    </nav>
-</div>
+        <?php  require 'nav.php'  ?>
+    </div>
     <?php
-     $id=$_GET['idprd'];
-     $promoprice=$_GET['promoprice'];
-     $catego=$_GET['cate'];
-     include "./classes/product.php";
-     $describe=new ProductOperations(0,0);
-     $table=$describe->description($id);
-      
-     $prix=number_format($table[0]['price'],2,'.','');
-      
+        $id=$_GET['idprd'];
+        $promoprice = isset($_GET['promoprice']) ? $_GET['promoprice'] : null;
+        $catego=$_GET['cate'];
+        include "./classes/product.php";
+        $describe=new ProductOperations(0,0);
+        $table=$describe->description($id);
+        $prix=number_format($table[0]['price'],2,'.','');
+        $lenom = $table[0]['productname'];
+        $lelink = $table[0]['imglink'];
      ?>
     <div class="decript_img_other flex w-11/12 mt-32  ">
         <div class="img_descri ml-16 w-1/2   mt-8    ">
-                  <img src="./images/<?php echo htmlspecialchars($table[0]['imglink']); ?>" class="rounded-xl" alt="">
+                  <img src="./images/<?php echo htmlspecialchars($lelink); ?>" class="rounded-xl" alt="">
         </div>
         <div class="decribe_prod ml-12 mt-5 w-1/2 flex flex-col">
             <div class="tilte_describe_price flex justify-between">
-                <div class="mt-2"><h2 class="text-white text-3xl font-semibold"><?php echo htmlspecialchars($table[0]['productname']); ?></h2></div>
+                <div class="mt-2"><h2 class="text-white text-3xl font-semibold"><?php echo htmlspecialchars($lenom); ?></h2></div>
                 <div class="flex flex-col">
                      <?php
-                       if(isset($promoprice)){
-                        echo'
-                        <p class="text-[rgba(255,255,255,0.7)] line-through">'.$prix.'MAD</p>
-                        <h4 class="text-[#EBDD36] text-xl font-bold">'."$promoprice".' MAD</h4>';
-
-                       }
-                       else{
-                        echo'<h4 class="text-[#EBDD36] text-xl font-bold">'."$prix".'MAD</h4>';
-                       }
+                         if(isset($promoprice)){
+                            echo'
+                            <p class="text-[rgba(255,255,255,0.7)] line-through">'.$promoprice.'MAD</p>
+                            <h4 class="text-[#EBDD36] text-xl font-bold">'."$prix".' MAD</h4>';
+                           }
+                           else{
+                            echo'<h4 class="text-[#EBDD36] text-xl font-bold">'."$prix".'MAD</h4>';
+                           }
                      ?>
                     
                    
@@ -102,7 +86,9 @@
 
              </div>
              <div class="mt-4">
-                <button type="button" class="w-full bg-[#EBDD36] py-2 rounded-xl text-white text-xl font-medium hover:bg-yellow-400">Add to cart</button>
+              <?php
+                echo "<button type='button' class='w-full bg-[#EBDD36] py-2 rounded-xl text-white text-xl font-medium hover:bg-yellow-400' onclick='addtocart($id,\"$lenom\",$prix,\"$lelink\")'>Add to cart</button>"
+                ?>
              </div>
         </div>
 
@@ -139,7 +125,6 @@
           <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <?php
-        
                 $describe->similaieCategoProd($catego);
             ?>
         </div>
@@ -176,7 +161,7 @@
         </div>
 
       </div>
-
+    <?php require './DisplayCartInPages.php'  ?>
     <script src="./payment.js"></script>
     <script src="swiper-bundle.min.js"></script>
   <script>

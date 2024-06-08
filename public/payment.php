@@ -100,8 +100,8 @@
             
     </div>
         </div>
-
-     
+        
+        
     <script src="./script.js"></script>
     <script src="./payment.js"></script>
 </body>

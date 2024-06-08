@@ -16,7 +16,7 @@
       height: 30%;
       /* transform: translate(-50%,-50%); */
     }
-    .swiper-slide{
+    .promoappearsatall{
         overflow: hidden;
     }
     .soldbtn{
@@ -103,8 +103,8 @@ session_start();
                   </div>
                </div>
                   <div class="range-input relative w-4/5 ml-[32px]">
-                   <input type="range" class="range-min absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000" id="rng-min" value="<?php echo $_SESSION['min']; ?>">
-                   <input type="range" class="range-max absolute top-[-5px] h-[5px] w-full" name="range_min" min="0" max="10000"  id="rng-max" value="<?php echo $_SESSION['max']; ?>">
+                   <input type="range" class="range-min absolute top-[-5px] h-[5px] w-full hover:cursor-pointer" name="range_min" min="0" max="10000" id="rng-min" value="<?php echo $_SESSION['min']; ?>">
+                   <input type="range" class="range-max absolute top-[-5px] h-[5px] w-full hover:cursor-pointer" name="range_min" min="0" max="10000"  id="rng-max" value="<?php echo $_SESSION['max']; ?>">
                   </div>
                 <input type="hidden" name="idcat" value="<?php echo $idp; ?>">
                 <input type="hidden" name="idbrand" value="<?php echo $idbr; ?>">
@@ -129,6 +129,69 @@ session_start();
         <?php include './DisplayCartInPages.php' ;?>  
     </div>
 <script src="script.js"></script>
+<script>
+        const rangeinput=document.querySelectorAll(".range-input input"),
+    progresse = document.querySelector("#progreeee");
+    let gap_price=0;
+    let input_field=document.querySelectorAll(".prix-enred");
+
+
+    input_field.forEach(input => {
+        input.addEventListener("input", e => {
+            let minvaleur = parseInt(input_field[0].value),
+                maxvaleur = parseInt(input_field[1].value);
+
+            if (maxvaleur > 10000) {
+                maxvaleur = 10000;
+            }
+            if (maxvaleur - minvaleur >= gap_price) {
+                if (e.target.classList.contains("min_input")) {
+                    rangeinput[0].value = minvaleur;
+                    updateProgress(); 
+                } else {
+                    rangeinput[1].value = maxvaleur;
+                    updateProgress(); 
+            }
+            }  
+        });
+    });
+
+    rangeinput.forEach(input =>{
+        input.addEventListener("input",e=>{
+            let minvaleur=parseInt(rangeinput[0].value),
+            maxvaleur=parseInt(rangeinput[1].value);
+            if(maxvaleur>10000){
+                rangeinput[1].value=10000;
+            }
+            if(maxvaleur-minvaleur < gap_price){
+                if(e.target.className === "range-min"){
+                    rangeinput[0].value=maxvaleur - gap_price;
+                }
+            else{
+                rangeinput[1].value=minvaleur + gap_price;
+            }
+            }
+            else{
+                input_field[0].value=minvaleur;
+                input_field[1].value=maxvaleur;
+                updateProgress(); 
+            }  
+            
+        });
+    });
+    function updateProgress() {
+        let minvaleur = parseInt(rangeinput[0].value);
+        let maxvaleur = parseInt(rangeinput[1].value);
+        let range = maxvaleur - minvaleur;
+        let totalRange = parseInt(rangeinput[1].max) - parseInt(rangeinput[0].min);
+        let progressLeft = (minvaleur - parseInt(rangeinput[0].min)) / totalRange * 100;
+        let progressRight = 100 - ((maxvaleur - parseInt(rangeinput[0].min)) / totalRange * 100);
+
+        progresse.style.left = progressLeft + "%";
+        progresse.style.right = progressRight + "%";
+    }
+    updateProgress();
+</script>
 <script src="swiper-bundle.min.js"></script>
   <script>
     var swiper = new Swiper(".mySwiper", {

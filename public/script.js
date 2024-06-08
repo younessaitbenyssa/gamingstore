@@ -26,40 +26,7 @@ ids = [
         marid : "laptop2",
     }
 ]
-// addcartids = [
-//     {
-//         id:1,
-//         btnid : "cartspan1",
-//     },
-//     {
-//         id:2,
-//         btnid : "cartspan2",
-//     },
-//     {
-//         id:3,
-//         btnid : "cartspan3",
-//     },
-//     {
-//         id:4,
-//         btnid : "cartspan4",
-//     },
-//     {
-//         id:5,
-//         btnid : "cartspan5",
-//     },
-//     {
-//         id:6,
-//         btnid : "cartspan6",
-//     },
-//     {
-//         id:7,
-//         btnid : "cartspan7", 
-//     },
-//     {
-//         id:8,
-//         btnid : "cartspan8",
-//     }
-// ]
+
 /////////////////////////////////////////////
 ////////////////////////////////////////////////
 function appear(index){
@@ -99,7 +66,6 @@ fetch('./script2.php')
     return response.json();
   })
   .then(data => {
-    console.log(data);
     cart=data;
     displaycart2();
 
@@ -111,76 +77,31 @@ fetch('./script2.php')
 // // Call fetchCartData to populate cart array
 booom();
 //////////////////////////////////
-/////////move data from panier to payment page
-
- 
-    
+/////////move data from panier to payment page    
 function add_payment(){
- 
         window.location.href = './payment.php';
-//         console.log(11111111111);
-        
    }
-
     const comender = document.querySelector("#commander");
     comender.addEventListener("click",add_payment);
- 
 
-
+    
 ///////////////////////////////////////
-function displaycart() {
-
-    let j = 0;
-    if (cart.length == 0){
-        let crtico = document.getElementById("cartico");
-        crtico.innerHTML = "0";
-        let x = document.getElementById("cartItem");
-        x.classList.add('emptycart');
-        document.getElementById("totale").innerHTML = "$ "+0+".00"
-        x.innerHTML = "Your cart is empty";
-    } else {
-        let total = 0;
-        let quantitySum = 0;
-        let crtico = document.getElementById("cartico");
-        document.getElementById("cartItem").classList.remove("emptycart");
-        document.getElementById("cartItem").innerHTML = cart.map((item) => {
-            total = total + item.price * item.quantity;
-            quantitySum += item.quantity;
-            crtico.innerHTML = quantitySum;
-            return `
-                <div class='cart-item'>
-                    <div class='row-img'>
-                        <img class='rowing' src='${item.image}'>
-                    </div>
-                    <div class='namepr'>
-                        <p style='font-size:17px; color : white;font-weight:600'>${item.name}</p>
-                    </div>
-                    <div class='pricepr'>
-                        <h2 style='font-size:15px;color:white;font-weight:400'><span style = 'color: gold; '>${item.quantity}</span> * $${item.price.toFixed(2)}</h2>
-                    </div>
-                    <i class='bx bx-trash' onclick='deleteElement(${j++})'></i>
-                </div>`;
-        }).join('');
-        document.getElementById("totale").innerHTML = "$ " + total.toFixed(2); 
-    }
-}
-
 function displaycart2() {
-
     let j = 0;
+    const parentDocument = window.parent.document;
     if (cart.length == 0){
-        let crtico = document.getElementById("cartico");
+        let crtico = parentDocument.getElementById("cartico");
         crtico.innerHTML = "0";
-        let x = document.getElementById("cartItem");
+        let x = parentDocument.getElementById("cartItem");
         x.classList.add('emptycart');
-        document.getElementById("totale").innerHTML = "$ "+0+".00"
+        parentDocument.getElementById("totale").innerHTML = "$ "+0+".00"
         x.innerHTML = "Your cart is empty";
     } else {
         let total = 0;
         let quantitySum = 0;
-        let crtico = document.getElementById("cartico");
-        document.getElementById("cartItem").classList.remove("emptycart");
-        document.getElementById("cartItem").innerHTML = cart.map((item) => {
+        let crtico = parentDocument.getElementById("cartico");
+        parentDocument.getElementById("cartItem").classList.remove("emptycart");
+        parentDocument.getElementById("cartItem").innerHTML = cart.map((item) => {
             total = total + item.price * item.quantity;
             quantitySum += item.quantity;
             crtico.innerHTML = quantitySum;
@@ -194,13 +115,13 @@ function displaycart2() {
                     <div class='namepr'>
                         <p style='font-size:17px; color : white;font-weight:600'>${item.name}</p>
                     </div>
-                    <div class='pricepr'>
-                        <h2 style='font-size:15px;color:white;font-weight:400'><span style = 'color: gold; '>${item.quantity}</span> * $${item.price.toFixed(2)}</h2>
+                    <div class='w-20'>
+                        <h2 style='font-size:15px;color:white;font-weight:400'> <span style = 'color: gold; '>${item.quantity}</span> * ${item.price.toFixed(2)} </h2>
                     </div>
                     <i class='bx bx-trash' onclick='deleteElement(${j++})'></i>
                 </div>`;
         }).join('');
-        document.getElementById("totale").innerHTML = "$ " + total.toFixed(2); 
+        parentDocument.getElementById("totale").innerHTML = "MAD " + total.toFixed(2); 
     }
 }
 ////send to php file to add to cart table
@@ -234,35 +155,31 @@ function sendToCartTableExist(object_vari) {
         console.log(data);
      })}
 
-function removeFromCartTable(index){
-    console.log("rrrrrrrrrrrrrrrrrrrr");
-    console.log(index);
-    let object_vari=({
-        id:index,
-        name:"delete"
-    });
-    let params = {
-        "method": "POST",
-        "headers": {
-           "Content-Type": "application/json; charset=utf-8"
-        },
-
-        "body": JSON.stringify(object_vari )
-     }
-     fetch("./script.php", params).then(function(response){
-        return response.text();
-     }).then(function(data){
-        console.log(data);
-     })
-}
+     function removeFromCartTable(index) {
+        console.log("Removing from cart table, ID:", index);
+        let object_vari = {
+            id: index,
+            name: "delete"
+        };
+        let params = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify(object_vari)
+        };
+        fetch("./script.php", params).then(function(response) {
+            return response.text();
+        }).then(function(data) {
+            console.log(data);
+        }).catch(function(error) {
+            console.error("Error in fetch:", error);
+        });
+    }
 
 
 // ////add to cart in page
 function addtocart(index, name, prix, link) {
-    console.log(index);
-    console.log(name);
-    console.log(prix);
-    console.log(link);
     var nom = decodeURIComponent(name.replace(/\+/g, ' '));
     var links = decodeURIComponent(link.replace(/\+/g, ' '));
     const existingitem=cart.find(item=>item.id===index);
@@ -272,8 +189,7 @@ function addtocart(index, name, prix, link) {
             id:index,
             name:"a"
         });
-        sendToCartTableExist(existOBJ);
-        
+        sendToCartTableExist(existOBJ);  
     }
     else{
         var item =({
@@ -284,42 +200,31 @@ function addtocart(index, name, prix, link) {
             quantity:1
         });
         cart.push(item);
-
-        sendToCartTable(item);
-
-        
+        console.log(cart);
+        sendToCartTable(item);   
     }
-    // console.log(index);
-    // console.log(nom);
-    // console.log(price);
-    // console.log(links);
     booom();
-    displaycart();
+    displaycart2();
     booom();
-     
-    
 }
 
 
 function deleteElement(index) {
-    // let id_remove_prod=({
-    //     id:cart[index].id
-    // });
-    let id_wanna_remove=cart[index].id_cart;
-    cart.splice(index, 1);
-    booom();
-    displaycart();
-    booom();
-    
-    // fetchCartData();
+    console.log("Deleting element at index:", index);
+    if (index >= 0 && index < cart.length) {
+        let id_wanna_remove = cart[index].id_cart;
+        cart.splice(index, 1);
+        console.log("Cart after deletion:", cart);
+        booom();
+        displaycart2();
+        booom();
+        removeFromCartTable(id_wanna_remove);
+    } else {
+        console.error("Invalid index:", index);
+    }
+}
+displaycart2();
 
-   
-   
-    removeFromCartTable(id_wanna_remove);
-
-  }
-displaycart();
-// fetchCartData();
  
  
 function hidecart(){
@@ -336,251 +241,73 @@ function appearcart(){
     hd.classList.remove("cartanim")
     hd.classList.add("cartappear");
 }
+//this is for the search process 
 
+let availablekeywors = [];
+if (availablekeywors.length == 0){
+    fetch('send.php')
+        .then(response => response.json())
+        .then(data => {
+            availablekeywors = data.map(product => ({
+                id: product.prdid,
+                name: product.productname,
+                link: product.imglink,
+                categ: product.categorie
+            }));
 
-
-
-
-
-//filter 
-
-const rangeinput=document.querySelectorAll(".range-input input"),
-progresse=document.querySelector("#progreeee");
-let gap_price=0;
-let input_field=document.querySelectorAll(".prix-enred");
-
-
-input_field.forEach(input => {
-    input.addEventListener("input", e => {
-        let minvaleur = parseInt(input_field[0].value),
-            maxvaleur = parseInt(input_field[1].value);
-
-        if (maxvaleur > 10000) {
-            maxvaleur = 10000;
-        }
-        if (maxvaleur - minvaleur >= gap_price) {
-            if (e.target.classList.contains("min_input")) {
-                rangeinput[0].value = minvaleur;
-                updateProgress(); 
-            } else {
-                rangeinput[1].value = maxvaleur;
-                updateProgress(); 
-           }
-        }  
-    });
-});
-
-rangeinput.forEach(input =>{
-    input.addEventListener("input",e=>{
-        let minvaleur=parseInt(rangeinput[0].value),
-        maxvaleur=parseInt(rangeinput[1].value);
-        if(maxvaleur>10000){
-            rangeinput[1].value=10000;
-        }
-        if(maxvaleur-minvaleur < gap_price){
-            if(e.target.className === "range-min"){
-                rangeinput[0].value=maxvaleur - gap_price;
-            }
-           else{
-            rangeinput[1].value=minvaleur + gap_price;
-           }
-        }
-        else{
-            input_field[0].value=minvaleur;
-            input_field[1].value=maxvaleur;
-            updateProgress(); 
-        }  
-        
-    });
-});
-
-
-
-
-
-
-
-
-function updateProgress() {
-    let minvaleur = parseInt(rangeinput[0].value);
-    let maxvaleur = parseInt(rangeinput[1].value);
-    let range = maxvaleur - minvaleur;
-    let totalRange = parseInt(rangeinput[1].max) - parseInt(rangeinput[0].min);
-    let progressLeft = (minvaleur - parseInt(rangeinput[0].min)) / totalRange * 100;
-    let progressRight = 100 - ((maxvaleur - parseInt(rangeinput[0].min)) / totalRange * 100);
-
-    progresse.style.left = progressLeft + "%";
-    progresse.style.right = progressRight + "%";
+            console.log(availablekeywors);
+        })
+        .catch(error => console.error('Error fetching data:', error));
 }
 
 
-// input_field.forEach(input => {
-//     input.addEventListener("input", e => {
-//         let minvaleur = parseInt(input_field[0].value);
-//         let maxvaleur = parseInt(input_field[1].value);
-
-//         if (maxvaleur > 10000) {
-//             maxvaleur = 10000;
-//         }
-//         if (maxvaleur - minvaleur >= gap_price) {
-//             if (e.target.classList.contains("min_input")) {
-//                 rangeinput[0].value = minvaleur;
-//             } else {
-//                 rangeinput[1].value = maxvaleur;
-//             }
-//             updateProgress();
-//         }
-//     });
-// });
 
 
+const resultsBox = document.querySelector(".result-box");
+const inputBox = document.getElementById("input-box");
 
-// rangeinput.forEach(input => {
-//     input.addEventListener("input", e => {
-//         let minvaleur = parseInt(rangeinput[0].value);
-//         let maxvaleur = parseInt(rangeinput[1].value);
-//         if (maxvaleur > 10000) {
-//             rangeinput[1].value = 10000;
-//         }
-//         if (maxvaleur - minvaleur < gap_price) {
-//             if (e.target.className === "range-min") {
-//                 rangeinput[0].value = maxvaleur - gap_price;
-//             } else {
-//                 rangeinput[1].value = minvaleur + gap_price;
-//             }
-//         }
-//         updateProgress();
-//     });
-// });
-updateProgress();
+inputBox.onkeyup = function(){
+    let result = [];
+    let input = inputBox.value;
+    if(input.length){
+        result = availablekeywors.filter((keyword)=>{
+            return keyword.name.toLowerCase().includes(input.toLocaleLowerCase());
+        });
+        console.log(result);
+    }
+    display(result);
+    if (!result.length){
+        resultsBox.innerHTML = '';
+    }
+}
+
+
+
+function display(result){
+    const content = result.map((list)=>{
+        // let links = list.link;
+        // inks = decodeURIComponent(links.replace(/\%/g, ' '));
+        return "<a href = 'description.php?idprd="+list.id+"&cate="+list.categ+"'><li onclick='selectInput(\""+list.name+"\")' class='searchbar'> <img src='./images/"+list.link+"'>  <h1 class='h1div'>" + list.name + "</h1></li> </a>";
+    });
+    resultsBox.innerHTML = "<ul>" + content.join('') +  "</ul>";
+}
+function selectInput(list){
+    // console.log(list);
+    inputBox.value = list;
+    resultsBox.innerHTML = '';
+}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function updateRangeSlider(minValue, maxValue) {
-//     // Update range input values without triggering input event
-//     rangeinput[0].value = document.getElementById("rng-min").value;
-//     rangeinput[1].value = document.getElementById("rng-max").value;
-
-//     // Update visual representation if needed (like progress bar)
-//     progresse.style.left = (minValue / rangeinput[0].max) * 100 + "%";
-//     progresse.style.right = (100 - (maxValue / rangeinput[1].max) * 100) + "%";
-// }
-
-
-
-
-
-// var filter=[];
-// function render_filtred_products(filter) {
-//     console.log(filter);
-    
-//     var productFilterElement = document.querySelector(".productsssss");
-//     console.log(productFilterElement);
-     
-//     productFilterElement.innerHTML=filter.map((item, index) => {
-//         return `
-//         <div class='prdcnt'>
-//             <div class='produit'>
-//                 <img src='images/${decodeURIComponent(item.imglink.replace(/\+/g, ' '))}' class='prdimg'>
-//             </div>
-//             <h1>${item.productname}</h1>
-//             <h2>$${item.price.toFixed(2)}</h2>
-//             <button class='bg-[#EBDD36] text-white rounded-[10px] w-40 h-8 items-center overflow-hidden' onmouseover='carteffect(${index})' onmouseleave='carteffectmove(${index})' onclick='addtocart(${item.id},"${item.name}",${item.price},"${item.imagelink}")'>
-//                 <div class='flex flex-col cartanimatio' id='cartspan${index}'>
-//                     <span class='mt-1'>ADD TO CART</span>
-//                     <i class='bx bx-cart-add'></i> 
-//                 </div> 
-//             </button>
-//         </div>`;
-//     }).join('');
-
-//     // Redirect after rendering
-//     window.location.href = './filterede.php';
-// }
-
-
-
-
-// function filter_products() {
-//     const min_range=document.querySelector(".range-min");
-//     const a=min_range.value;
-//     const max_range=document.querySelector(".range-max");
-//     const b=max_range.value;
-//     var item = {
-//         low_price: a,
-//         max_price: b
-//     };
-
-//     let params = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json; charset=utf-8"
-//         },
-//         body: JSON.stringify(item)
-//     };
-
-//     fetch("./filter.php", params)
-//     .then(function(response) {
-//         return response.text();
-//     })
-//     .then(function(data) {
-//         console.log("Response:", data);
-         
-//          var jsonData = JSON.parse(data);
-//         console.log(jsonData);
-         
-//         var sendData=JSON.stringify(jsonData);
-//         localStorage.setItem('renderedContent',sendData);
-//          console.log(jsonData);
-//          window.location.href = './filterede.php';   
-//     })
-//     .catch(function(error) {
-//         console.error('Error:', error);
-//     });
-
-
-        
-
-// }
-// const apply_filter=document.querySelector("#filter_applyed");
-// apply_filter.addEventListener("click",filter_products);
-
-
-
-// var swiper = new Swiper(".maSwiperpromo", {
-//     slidesPerView: 4,
-//     loop : true,
-//     spaceBetween: 30,
-//     freeMode: true,
-//     pagination: {
-//       el: ".swiper-pagination",
-//       clickable: true,
-//     },
-//     autoplay:{
-//       delay : 2000
-//     },
-//     navigation: {
-//       nextEl: '.swiper-button-next',
-//       prevEl: '.swiper-button-prev',
-//     },
-//   });
-
-
-
+document.querySelectorAll('.prdcnt').forEach(container => {
+    container.addEventListener('click', function(event) {
+        if (event.target.closest('.cartanimatio')) {
+            return;
+        }
+        const productId = this.getAttribute('data-id');
+        const productCat = this.getAttribute('data-cat');
+        window.top.location.href = 'description.php?idprd=' + productId+'&cate='+productCat;
+    });
+});
 
