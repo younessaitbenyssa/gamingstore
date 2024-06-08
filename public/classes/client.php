@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
     $email = $_POST['Email'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    if(empty($name) || empty($penom) || empty($address) || empty($email) || empty($password) || empty($confirm_password)){
+    if(empty($name) || empty($prenom) || empty($address) || empty($email) || empty($password) || empty($confirm_password)){
         header("Location: ../sing_up.html");
             exit();
     }

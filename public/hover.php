@@ -153,7 +153,7 @@
         <a class="niv" href="services.php">Services</a>
     </div>
     <div class="flex mr-6 gap-6 items-center">
-        <div class="search-box">
+        <div class="search-box mt-2">
             <div class="row">
                 <input type="text" id="input-box" placeholder="search" autocomplete="off" class="w-[300px] rounded-[20px] bg-[rgb(49,49,49)] text-white h-10 mr-5 placeholder:text-[rgba(235,221,54,0.5)] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]">
                 <button><i class='bx bx-search m-auto'></i></button>
@@ -161,11 +161,8 @@
             <div class="result-box"> 
             </div>
         </div>
-        <div class="flex mr-6 gap-6">
             <i class='bx bx-user m-auto'></i>
-            <div >
-                <h3 class="mt-4">Sign in / sign up </h3>
-            </div>
+                <h3>Sign in / sign up </h3>
             <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
         </div>
     </nav>
