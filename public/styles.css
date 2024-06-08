@@ -1077,7 +1077,6 @@ input[type="range"]::-webkit-slider-thumb{
   color: #EBDD36;
 }
 
-<<<<<<< HEAD
 .result-box{
   position: fixed;
   top: 90px;
@@ -1119,7 +1118,7 @@ input[type="range"]::-webkit-slider-thumb{
 .searchbar img{
   width: 100px;
   height: 100px;
-=======
+}
 .email_exist{
   display: none;
 }
@@ -1130,7 +1129,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .image_side{
   border-radius: 30px 0 0 30px ;
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
 }
 
 *, ::before, ::after{

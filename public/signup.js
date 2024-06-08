@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', () => {
-
-
-
-=======
-  
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     
 
  
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
 
 
     let email = document.querySelector(".test_email");
@@ -39,27 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     document.querySelector("#errrrror").classList.add("email_exist");
                 }
-<<<<<<< HEAD
 
 
-=======
-                 
-            
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
               })
             .catch(error => {
                 console.error('Error:', error);
             });
     }
-<<<<<<< HEAD
 
 
 
-=======
- 
-
- 
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
     let password = document.querySelector(".pass");
     let confirm_pass = document.querySelector(".pass_confirm");
     confirm_pass.addEventListener("blur",test_password);
@@ -75,16 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-<<<<<<< HEAD
 
 });
-=======
-   
-});
-
-
- 
- 
-
-
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99

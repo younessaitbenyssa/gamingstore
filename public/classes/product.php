@@ -106,11 +106,8 @@
             $this->productsdisplayt($table);
         } 
         function DisplayAll (){
-<<<<<<< HEAD
             $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8");
-=======
             $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8 ");
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute();
             $table = $ins->fetchAll();

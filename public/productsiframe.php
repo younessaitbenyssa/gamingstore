@@ -33,10 +33,6 @@
                     $ifrmprd->DisplayBrand($idt);
             ?>
         </div>
-<<<<<<< HEAD
-    <script src="script.js"></script>
-=======
         <script src="./script.js"></script>
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
 </body>
 </html>
