@@ -7,10 +7,16 @@
         <a class="niv" href="">Products</a>
         <a class="niv" href="services.php">Services</a>
     </div>
-    <div class="flex mr-6 gap-6">
-        <i class='bx bx-search m-auto'></i>
+    <div class="flex mr-6 gap-6 items-center">
+        <div class="search-box">
+            <div class="row">
+                <input type="text" id="input-box" placeholder="search" autocomplete="off" class="w-[300px] rounded-[20px] bg-[rgb(49,49,49)] text-white h-10 mr-5 placeholder:text-[rgba(235,221,54,0.5)] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]">
+                <button><i class='bx bx-search m-auto'></i></button>
+            </div>
+            <div class="result-box"> 
+            </div>
+        </div>
         <i class='bx bx-user m-auto'></i>
         <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
-        <!-- <img src="images/sony headphones/casque2.png" alt=""> -->
     </div>
 </nav>

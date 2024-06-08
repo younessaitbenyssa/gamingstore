@@ -12,3 +12,4 @@
             </div>
             <button id="commander" class="bg-[#EBDD36] text-white w-[90%] h-10 mt-auto rounded-2xl ml-auto mr-auto">Commander</button>
 </div>
+<script src="script.js"></script>
