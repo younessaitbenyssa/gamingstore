@@ -31,7 +31,7 @@
                 <div class="w-full  lg:w-1/2 py-16 px-12">
                     <h2 class="text-3xl mb-3 pl-[100px] text-white">Sign up</h2>
                     <p class="mb-3 text-white pl-[40px]">Create your account, it's free and fast</p>
-            <form action="./classes/client.php" method="post"> 
+            <form action="emailsend.php" method="post"> 
                     <div class="grid grid-cols-2 gap-5">
                          
                         <input type="text" class="name_first  border    text-white border-white py-1 px-2 bg-transparent rounded-[30px] placeholder:text-white focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" placeholder="Firstname" name="Firstname">
@@ -44,7 +44,6 @@
                     <div class="mt-3 ">
                         <input type="email" placeholder="Email" id="cv" class="test_email placeholder:text-white text-white border-white py-1 px-2 w-full bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" name="Email">
                     </div>
-                    <!--      -->
                     <div id="errrrror" class="email_exist bg-red-200 mt-2 rounded-[30px]">
                         <p class="text-red-400 ml-2">Email already exist</p>
                     </div>
@@ -66,7 +65,7 @@
                         <button type="submit" name="signup" id="signbutt"    class="   w-full bg-[#EBDD36] hover:bg-yellow-400 py-2 text-center text-white rounded-lg font-semibold">Sign up </button>
                       </div>
                       <div class="mt-2">
-                        <span class="text-white px-10">I already have an accout <a href="./sign_in.html" class="text-[#EBDD36] font-semibold hover:underline">Sign in</a></span>
+                        <span class="text-white px-10">I already have an accout <a href="./sign_in.php" class="text-[#EBDD36] font-semibold hover:underline">Sign in</a></span>
                       </div>
                 </div>
             </form>

@@ -1077,6 +1077,49 @@ input[type="range"]::-webkit-slider-thumb{
   color: #EBDD36;
 }
 
+.result-box{
+  position: fixed;
+  top: 90px;
+  width: 300px;
+  background: rgb(49, 49, 49);
+  max-height: 555px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.result-box ul{
+  border-top: 1px solid #999;
+  padding: 15px 10px;
+}
+
+.result-box ul li{
+  list-style: none;
+  border-radius: 3px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+.result-box ul li:hover{
+  background: rgba(255, 255, 255, 0.5);
+  color: black;
+}
+
+.h1div{
+  width: 115px;
+  font-size: x-large;
+}
+
+.searchbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchbar img{
+  width: 100px;
+  height: 100px;
+}
+
 .email_exist{
   display: none;
 }
@@ -1793,6 +1836,10 @@ input[type="range"]::-webkit-slider-thumb{
   display: block;
 }
 
+.inline{
+  display: inline;
+}
+
 .flex{
   display: flex;
 }
@@ -1883,6 +1930,10 @@ input[type="range"]::-webkit-slider-thumb{
 
 .h-\[300px\]{
   height: 300px;
+}
+
+.h-\[30px\]{
+  height: 30px;
 }
 
 .h-\[400px\]{
@@ -2017,6 +2068,10 @@ input[type="range"]::-webkit-slider-thumb{
   width: 100%;
 }
 
+.w-\[100px\]{
+  width: 100px;
+}
+
 .w-\[110px\]{
   width: 110px;
 }
@@ -2087,6 +2142,10 @@ input[type="range"]::-webkit-slider-thumb{
 
 .w-\[50\%\]{
   width: 50%;
+}
+
+.w-\[500px\]{
+  width: 500px;
 }
 
 .w-\[50px\]{
@@ -2344,6 +2403,10 @@ input[type="range"]::-webkit-slider-thumb{
   border-width: 1px;
 }
 
+.border-2{
+  border-width: 2px;
+}
+
 .border-\[1px\]{
   border-width: 1px;
 }
@@ -2354,6 +2417,11 @@ input[type="range"]::-webkit-slider-thumb{
 
 .border-solid{
   border-style: solid;
+}
+
+.border-black{
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .border-slate-500{
@@ -2735,6 +2803,10 @@ input[type="range"]::-webkit-slider-thumb{
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.\[hostname\:port\]{
+  hostname: port;
 }
 
 .placeholder\:text-\[rgba\(235\2c 221\2c 54\2c 0\.5\)\]::-moz-placeholder{

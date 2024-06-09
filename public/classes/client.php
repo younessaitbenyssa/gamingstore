@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class Client {
     private $pdo;
     private $nom;
@@ -83,7 +83,7 @@ class Client {
             ':email' => $this->getEmail(),
             ':password' => $this->getPassword()
         ]);
-        header("Location: ../hover.php");
+            header("Location: ../hover.php");
         exit();
     }
 
@@ -106,18 +106,18 @@ class Client {
 }
 
 // Registration
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['signup'])) {
-    $name = $_POST['Firstname'];
-    $prenom = $_POST['Familyname'];
-    $address = $_POST['Address'];
-    $email = $_POST['Email'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    // if((empty($name) || empty($penom) || empty($address) || empty($email) || empty($password) || empty($confirm_password))&&$password !== $confirm_password){
-    //     header("Location: ../sing_up.html");
-    //         exit();
-    // }
-
+if ($_SESSION['verify'] == 1) {
+    $name = $_SESSION['Firstname'];
+    $prenom = $_SESSION['Familyname'];
+    $address = $_SESSION['Address'];
+    $email = $_SESSION['Email'];
+    $password = $_SESSION['password'];
+    $confirm_password = $_SESSION['confirm_password'];
+    if(empty($name) || empty($prenom) || empty($address) || empty($email) || empty($password) || empty($confirm_password)){
+        header("Location: ../sing_up.html");
+            exit();
+    }
+    
     if ($password === $confirm_password) {
         $customer = new Client($name, $prenom, $address, $email, $password);
         $customer->save();
