@@ -105,6 +105,7 @@ class Client {
     }
 }
 
+// Registration
 if ($_SESSION['verify'] == 1) {
     $name = $_SESSION['Firstname'];
     $prenom = $_SESSION['Familyname'];
@@ -116,13 +117,11 @@ if ($_SESSION['verify'] == 1) {
         header("Location: ../sing_up.html");
             exit();
     }
-
+    
     if ($password === $confirm_password) {
         $customer = new Client($name, $prenom, $address, $email, $password);
         $customer->save();
-    } else {
-        echo "Passwords do not match.";
-    }
+    }  
 }
 
 // Login
