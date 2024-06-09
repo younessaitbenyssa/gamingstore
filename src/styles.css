@@ -201,6 +201,8 @@
         font-style: italic;
     }
     .footter{
+        
+         
         background: rgb(255,241,146);
          background: linear-gradient(0deg, rgba(255,241,146,1) 0%, rgba(255,221,60,1) 23%, rgba(255,221,60,1) 52%, rgba(255,212,0,1) 81%); 
     }
@@ -403,43 +405,6 @@
     .naviframe a.active {
         color: #EBDD36;
     }
-<<<<<<< HEAD
-    .result-box{
-        position: fixed;
-        top: 90px;
-        width: 300px;
-        background: rgb(49, 49, 49);
-        max-height: 555px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-    .result-box ul{
-        border-top: 1px solid #999;
-        padding: 15px 10px;
-    }
-    .result-box ul li{
-        list-style: none;
-        border-radius: 3px;
-        padding: 5px 5px;
-        cursor: pointer;
-    }
-    .result-box ul li:hover{
-        background: rgba(255, 255, 255, 0.5);
-        color: black;
-    }
-    .h1div{
-        width: 115px;
-        font-size: x-large;
-    }
-    .searchbar{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .searchbar img{
-        width: 100px;
-        height: 100px;
-=======
     
 
     .email_exist{
@@ -454,7 +419,6 @@
 
     .image_side{
         border-radius: 30px 0 0 30px ;
->>>>>>> 51e6f2fb7c674f7cf08cfa2ba4902c457370ae99
     }
     
 

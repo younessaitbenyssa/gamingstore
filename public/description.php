@@ -138,7 +138,7 @@
     </div>
     </div>
     </div>  
-      <div class="footeeeer mt-20 bg-yellow-300 w-full  ">
+      <div class="footeeeer mt-20 bg-[rgb(0,0,0)] w-full   ">
         
         <div class="ml-[20%] mt-[5%]">
             <h5>About</h5>
