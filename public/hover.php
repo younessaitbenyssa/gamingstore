@@ -166,7 +166,7 @@
             <div class="result-box"> 
             </div>
         </div>
-            <div  class="loug flex flex-col gap-0 relative "><div ><i id="user" class='bx bx-user m-auto  cursor-pointer'></i></div>
+            <div  class="loug flex flex-col gap-0 relative "><div ><i id="user" class='bx bx-user m-auto  cursor-pointer mt-2'></i></div>
             <div id="logg" class="outlog fixed  w-24 h-10 bg-black flex justify-center items-center cursor-pointer rounded-[15px] top-14 right-16  "><form action="./logout.php" method="POST"><button type="submit">Log out</button></form></div>
         </div>
            
@@ -200,7 +200,7 @@
                  
                  ?>
                 
-            <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
+            <i class='bx bx-cart-alt hover:cursor-pointer mt-6' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
         </div>
     </nav>
     <section class="relative top-8 h-screen w-screen">
@@ -488,10 +488,12 @@
         <a href="#" data-id="5">SONY</a>
     </nav>
     <div id="productContainer" class="container w-[80%] h-full mt-[3%] mx-auto"></div>
+</section>
+<?php include './DisplayCartInPages.php'  ?>
+
+<section class="h-screen w-screen">
     <?php include './footer.php' ?>
 </section>
-
-    <?php include './DisplayCartInPages.php'  ?>
     <script>
     
       document.querySelectorAll('.naviframe a').forEach(link => {
@@ -513,7 +515,6 @@
                 .catch(error => console.error('Error:', error));
         }
 
-        // Load default products for "TOUS" on page load
         window.onload = function() {
             loadProducts(0);
         };

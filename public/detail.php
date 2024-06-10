@@ -126,9 +126,9 @@ session_start();
                     ?>
             </div>
         </div>
-        <?php include './footer.php' ?>
         <?php include './DisplayCartInPages.php' ;?>  
     </div>
+    <?php include './footer.php' ?>
 <script src="script.js"></script>
 <script>
         const rangeinput=document.querySelectorAll(".range-input input"),

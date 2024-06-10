@@ -2595,6 +2595,11 @@ input[type="range"]::-webkit-slider-thumb{
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-\[rgb\(100\2c 100\2c 100\)\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(100 100 100 / var(--tw-bg-opacity));
+}
+
 .bg-\[rgb\(36\2c 48\2c 63\)\]{
   --tw-bg-opacity: 1;
   background-color: rgb(36 48 63 / var(--tw-bg-opacity));
@@ -2887,6 +2892,16 @@ input[type="range"]::-webkit-slider-thumb{
 
 .font-semibold{
   font-weight: 600;
+}
+
+.text-\[\#1434CB\]{
+  --tw-text-opacity: 1;
+  color: rgb(20 52 203 / var(--tw-text-opacity));
+}
+
+.text-\[\#EB001B\]{
+  --tw-text-opacity: 1;
+  color: rgb(235 0 27 / var(--tw-text-opacity));
 }
 
 .text-\[\#EBDD36\]{
