@@ -1960,10 +1960,6 @@ input[type="range"]::-webkit-slider-thumb{
   height: 300px;
 }
 
-.h-\[30px\]{
-  height: 30px;
-}
-
 .h-\[400px\]{
   height: 400px;
 }
@@ -1972,8 +1968,8 @@ input[type="range"]::-webkit-slider-thumb{
   height: 405px;
 }
 
-.h-\[450px\]{
-  height: 450px;
+.h-\[40px\]{
+  height: 40px;
 }
 
 .h-\[457px\]{
@@ -2026,10 +2022,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .h-screen{
   height: 100vh;
-}
-
-.h-\[40px\]{
-  height: 40px;
 }
 
 .w-1\/2{
@@ -2120,10 +2112,6 @@ input[type="range"]::-webkit-slider-thumb{
   width: 100%;
 }
 
-.w-\[100px\]{
-  width: 100px;
-}
-
 .w-\[110px\]{
   width: 110px;
 }
@@ -2134,6 +2122,10 @@ input[type="range"]::-webkit-slider-thumb{
 
 .w-\[120px\]{
   width: 120px;
+}
+
+.w-\[140px\]{
+  width: 140px;
 }
 
 .w-\[17px\]{
@@ -2250,10 +2242,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .w-screen{
   width: 100vw;
-}
-
-.w-\[140px\]{
-  width: 140px;
 }
 
 .table-auto{
@@ -2949,11 +2937,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .focus\:border-transparent:focus{
   border-color: transparent;
-}
-
-.focus\:text-\[\#EBDD36\]:focus{
-  --tw-text-opacity: 1;
-  color: rgb(235 221 54 / var(--tw-text-opacity));
 }
 
 .focus\:outline-none:focus{
