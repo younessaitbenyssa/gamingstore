@@ -41,15 +41,32 @@ session_start();
     ?>
     <div class="color_back container flex flex-col justify-center items-center   w-10/12 h-[300px] relative left-[8%] mt-[10%]">
          <div class="image_categoris w-[110px] h-[110px]   mb-4 rounded-md flex justify-center items-center">
-            <img src="images/BENGOO_G9000_black_casque.png" alt="" class="imog h-[120px] w-[120px]">
+            <?php
+             $idnor = isset($_GET['menu'])?$_GET['menu']:null;
+             $idp =isset($_GET['idcat'])?$_GET['idcat']:null ;
+             if($idnor!=3){
+                if($idp==1){
+                    $pathing="images/rog.png";
+                }
+                else{
+                    $pathing="images/BENGOO_G9000_black_casque.png";
+                }
+                echo ' <img src='.$pathing.' alt="" class="imog h-[140px] w-[160px]">';
+             }
+
+            ?>
+           
          </div>
     <?php
-        $idp = $_GET['idcat'];
-        $idbr = $_GET['idbrand'];
-        $idnor = $_GET['menu'];
+    
+        $idp =isset($_GET['idcat'])?$_GET['idcat']:null ;
+        $idbr = isset($_GET['idbrand'])?$_GET['idbrand']:null;
+        
+        $brand_name=isset($_GET['brand_name'])?$_GET['brand_name']:null;
+        // $brand_id=isset($_GET['id_brand'])?$_GET['id_brand']:null;
         include './classes/product.php';
         $dispromotion  = new ProductOperations($idp,$idbr);
-        if ($idnor != 0){
+        if ($idnor != 0 && $idnor!=3){
             $minpr = $_GET['min_price'];
             $maxpr = $_GET['max_price'];
             $_SESSION['min'] = $minpr;
@@ -61,15 +78,48 @@ session_start();
     ?>
          <div class="flex flex-col justify-center items-center">
             <?php
-                $dispromotion->displaycategoryname();
+                if($idnor == 3){
+                    if($brand_name=='Razer'){
+                        $path='images/image-removebg-preview.png'; 
+        
+                      }
+                      elseif($brand_name=='ASUS'){
+                        $path='images/asus.png';
+                      }   
+                      elseif($brand_name=='Logitech'){
+                        $path='images/lgitvhlogo.png';
+                      }
+                      elseif($brand_name=='sony'){
+                        $path='images/sonylogo.png';
+                      }
+                      else{
+                            $path='images/hyperx.png';
+                      }
+                    
+                    echo "<h3 class='text-4xl px-auto font-bold  '> ".$brand_name." brand</h3>
+                    <img src=".$path." alt='' class='  h-[120px] w-[120px] mt-3  mb-10'>
+                    ";
+                 
+                }
+                else{
+                    $dispromotion->displaycategoryname();
+                }
+                
             ?>
          </div>
     </div>
+     
     <h1 class="text-center mt-[3%] text-3xl text-white font-bold" >PROMOTIONS</h1>
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <?php
-                $dispromotion->dispromo();
+                if($idnor==3){
+                    $dispromotion->dispromoAll();
+                }
+                else{
+                    $dispromotion->dispromo();
+                }
+                
             ?>
         </div>
         <div class="swiper-button-next soldbtn"><i class="fa-solid fa-chevron-right"></i></div>
@@ -81,7 +131,13 @@ session_start();
                <h3 class="text-white text-4xl font-semibold">Brand</h3>
             </div>
             <?php
-                $dispromotion->displayfilerbrands();
+                 if($idnor==3){
+                    $dispromotion->displayfilerbrands_from_hover();
+                 }
+                 else{
+                    $dispromotion->displayfilerbrands();
+                 }
+                
             ?>
           <div class="ml-[6%]  mt-6">
            <h4 class="text-white text-4xl font-semibold">Price</h4>
@@ -120,7 +176,12 @@ session_start();
                 <?php
                 if ($idnor == 0){
                    $dispromotion->displayproducts();
-                }else{
+                }
+                elseif($idnor == 3){
+                    $dispromotion->DisplayBrand($idbr);
+                }
+                
+                else{
                     $dispromotion->displayfiltredproducts($minpr,$maxpr);
                 }
                     ?>

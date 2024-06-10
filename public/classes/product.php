@@ -29,6 +29,7 @@
                         $ins->execute(array($this->idp));
                         $table = $ins->fetchAll();
                         $this->Mypromotions($table);
+                         
                     }
         function dispromoAll(){
             $ins = $this->pdo->prepare("
@@ -91,6 +92,21 @@
             ";
             }
         } 
+        function displayfilerbrands_from_hover(){
+            $ins = $this->pdo->prepare("SELECT brandname from brand ");
+            $ins->setFetchMode(PDO::FETCH_ASSOC); 
+            $ins->execute();
+            $tablo = $ins->fetchAll();
+            foreach ($tablo as $varo){
+            $brdname = $varo['brandname'];
+            echo "
+            <div class='mt-5 ml-[6%]'>
+            <input type='checkbox' class=' bg-transparent rounded-[3px] border-white   accent-[#EBDD36]' />
+            <span class='text-white hover:text-[#EBDD36] text-xl  mt-1'>".$brdname."</span>
+            </div>
+            ";
+            }
+        } 
         function displayproducts (){
             $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where categorie = ? AND brand_id = ? and prdid not in (select id from promotions)");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
@@ -118,6 +134,7 @@
             $ins->execute(array($idt));
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
+             
         }
 
         // function for admin: 
@@ -362,6 +379,35 @@
                
             </div>";}
            
+       }
+
+       function get_top_brands(){
+          
+         $ins=$this->pdo->prepare("
+            SELECT 
+            
+            DISTINCT b.brandname,
+            b.brand_id,
+            SUM(cp.quantity) AS total_quantity
+            FROM 
+                commande_produits cp
+            JOIN 
+                products p ON cp.product_id = p.prdid
+            JOIN 
+                brand b ON p.brand_id = b.brand_id
+            GROUP BY 
+                cp.product_id
+            ORDER BY 
+                total_quantity DESC
+            LIMIT 
+                4;
+         
+         ");
+            $ins->execute();
+            $result = $ins->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+
        }
        
     }

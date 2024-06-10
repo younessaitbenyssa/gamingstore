@@ -430,52 +430,46 @@
         <div>
             <h1 class="take text-white font-bold text-4xl mt-8  mb-12">Top Brands</h1>
         </div>
-        <div class="categorie_top w-10/12 mt-10">
+        <div class="categorie_top w-10/12 mt-10 pl-[28px]   ">
+              
+            <?php
 
-            <div class="catego  relative  w-[240px] h-[405px] rounded-2xl" style="background-image: url(images/yellowcasque.jpeg); ">
+                
+               
+              $table= $allaboutprd->get_top_brands();
+               
+              foreach($table as $vari){
+                
+              if($vari['brandname']=='Razer'){
+                $path='images/RAZER_brand.png'; 
+
+              }
+              elseif($vari['brandname']=='ASUS'){
+                $path='images/asus_brand.jpg';
+              }   
+              elseif($vari['brandname']=='Logitech'){
+                $path='images/logitch_brand.jpg';
+              }
+              elseif($vari['brandname']=='sony'){
+                $path='images/SONY_brand.jpg';
+              }
+              else{
+                    $path='images/HYPERX_BRAMD.jpg';
+              }
+              $a=3;
+              echo' <div class="catego  relative  w-[240px] h-[405px] rounded-2xl" style="background-image: url('.$path.'); ">
                 <div class="mt-3 ml-3">
-                    <h2 class="  text-white font-semibold text-lg  absolute z-10 ">Pc gamer</h2>
+                    <h2 class="  text-white font-semibold text-lg  absolute z-10 ">'.$vari['brandname'].'</h2>
                 </div>
                 <div>
-                    <button class="absolute z-10 bottom-4 left-[32%] border border-white rounded-xl px-4 py-2   bg-transparent text-white font-semibold">
+                   <a href="./detail.php?idbrand='.$vari['brand_id'].'&menu='.$a.'&brand_name='.$vari['brandname'].'"><button class="absolute z-10 bottom-4 left-[30%] border border-white rounded-xl px-4 py-2   bg-transparent text-white font-semibold">
                         Discover
-                    </button>
+                    </button></a>
                 </div>
 
-            </div>
-            <div class="catego  relative  w-[240px] h-[405px] rounded-2xl" style="background-image: url(images/yellowcasque.jpeg); ">
-                <div class="mt-3 ml-3">
-                    <h2 class="  text-white font-semibold text-lg  absolute z-10 ">Pc gamer</h2>
-                </div>
-                <div>
-                    <button class="absolute z-10 bottom-4 left-[32%] border border-white rounded-xl px-4 py-2   bg-transparent text-white font-semibold">
-                        Discover
-                    </button>
-                </div>
+            </div>';}
 
-            </div>
-            <div class="catego  relative  w-[240px] h-[405px] rounded-2xl" style="background-image: url(images/yellowcasque.jpeg); ">
-                <div class="mt-3 ml-3">
-                    <h2 class="  text-white font-semibold text-lg  absolute z-10 ">Pc gamer</h2>
-                </div>
-                <div>
-                    <button class="absolute z-10 bottom-4 left-[32%] border border-white rounded-xl px-4 py-2   bg-transparent text-white font-semibold">
-                        Discover
-                    </button>
-                </div>
-
-            </div>
-            <div class="catego  relative  w-[240px] h-[405px] rounded-2xl" style="background-image: url(images/yellowcasque.jpeg); ">
-                <div class="mt-3 ml-3">
-                    <h2 class="  text-white font-semibold text-lg  absolute z-10 ">Pc gamer</h2>
-                </div>
-                <div>
-                    <button class="absolute z-10 bottom-4 left-[32%] border border-white rounded-xl px-4 py-2   bg-transparent text-white font-semibold">
-                        Discover
-                    </button>
-                </div>
-
-            </div>
+             ?>
         </div>
     </section>
     <section class="h-screen">
