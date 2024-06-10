@@ -8,34 +8,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body class="bg-[rgba(49,49,49)]  bg-cover overflow-hidden">
-    <div class="w-full h-20 bg-slate-600 relative">
-        <div class="absolute left-5 top-2 w-12 h-12 rounded-[50px] bg-[rgba(49,49,49)] text-white flex justify-center items-center">XX</div>
-        <div class="ppp absolute  right-[88px] top-[30px]"><h2 class="text-white font-semibold cursor-pointer">ARROUBI YOUNESS</h2></div>
-        <div id="out" class="outt absolute   right-[48px] top-[90px] w-44 h-14 bg-slate-500 flex justify-center items-center cursor-pointer rounded-[15px] "><h2 class="text-white font-semibold text-xl ">Log out</h2> </div>
-    <div  class="ppp absolute right-5 top-2 w-16 h-16 rounded-[50px] bg-[rgba(49,49,49)] cursor-pointer"></div>
-    </div>
-    <div class="flex justify-between gap-2 w-full">
-    <div class="  w-[250px] h-[600px] bg-slate-600 ">
-     
-        <div class="text-gray-400  ml-9 mt-[60px]">MENU</div>
-        <div class="dashboadre mt-5 ml-9"><h2 class="text-slate-300  text-lg font-semibold"> <i class='bx bxs-bar-chart-alt-2'></i> Dashboard</h2></div>
-        <div class="clients mt-5 ml-9"><h2 class="text-slate-300  text-lg font-semibold"><i class='bx bxs-user'></i> Clients</h2></div>
-        <div class="produitss-dash mt-5 ml-9"><h2 class="text-slate-300  text-lg font-semibold"><i class='bx bx-shopping-bag'></i> Products</h2></div>
-        <div class="add_aprpodd mt-5 ml-9"><h2 class="text-slate-300  text-lg font-semibold"><i class='bx bx-bookmark-alt-minus'></i>  Promotions  </h2></div>
-
-        <div class="add_aprpodd mt-5 ml-9"><h2 class="text-slate-300  text-lg font-semibold"><i class='bx bxs-duplicate'></i> Add products</h2></div>
-        <div class="add_aprpodd mt-5 ml-9"><h2 class="text-slate-300  text-lg font-semibold"><i class='bx bxs-duplicate'></i> Add promotions</h2></div>
-
-
-
-
-    </div>
+    <?php require './dashbordfix.php' ?>
     <div class="dashbod flex justify-start gap-4 mr-12 mt-6 ">
            <div class="w-[238px] h-[168px] bg-slate-600 flex flex-col rounded-[22px]">
             <div class="w-12 h-12 bg-[rgba(49,49,49)] flex justify-center items-center rounded-[50px] mt-10 ml-9 "><i class='bx bxs-cart-alt text-white'></i></div>
             <div class="text-white font-semibold text-2xl ml-9 mt-2">$234,5k</div>
             <div class="text-gray-400  ml-9 mb-3">number of view</div>
-            
            </div>
            <div class="w-[238px] h-[168px] bg-slate-600 flex flex-col rounded-[22px]">
             <div class="w-12 h-12 bg-[rgba(49,49,49)] flex justify-center items-center rounded-[50px] mt-10 ml-9 "><i class='bx bxs-cart-alt text-white'></i></div>

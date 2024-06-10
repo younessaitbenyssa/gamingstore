@@ -94,7 +94,7 @@ function displaycart2() {
         crtico.innerHTML = "0";
         let x = parentDocument.getElementById("cartItem");
         x.classList.add('emptycart');
-        parentDocument.getElementById("totale").innerHTML = "$ "+0+".00"
+        parentDocument.getElementById("totale").innerHTML = "MAD "+0+".00"
         x.innerHTML = "Your cart is empty";
     } else {
         let total = 0;

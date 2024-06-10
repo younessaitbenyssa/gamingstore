@@ -92,34 +92,155 @@
             }
         } 
         function displayproducts (){
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where categorie = ? AND brand_id = ?");
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where categorie = ? AND brand_id = ? and prdid not in (select id from promotions)");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp,$this->idbr));
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
         }
         function displayfiltredproducts ($minpr,$maxpr){
-            $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ?");
+            $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ? and prdid not in (select id from promotions)");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp, $this->idbr, $minpr,$maxpr));
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
         } 
         function DisplayAll (){
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8");
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products limit 8 ");
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where prdid not in (select id from promotions) limit 8");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute();
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
         }
         function DisplayBrand ($idt){
-            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where brand_id = ? limit 8");
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where brand_id = ? and prdid not in (select id from promotions) limit 8");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($idt));
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
         }
+
+        // function for admin: 
+        function disadmincat (){
+            $ins = $this->pdo->prepare("
+                SELECT 
+                products.description,
+                products.categorie,
+                products.brand_id AS prndmfm,
+                products.prdid, 
+                products.productname, 
+                products.price, 
+                category.categorie AS catnam,
+                brand.brandname AS brdname 
+                FROM 
+                products
+                INNER JOIN 
+                category ON category.id = products.categorie 
+                INNER JOIN 
+                brand ON products.brand_id = brand.brand_id
+                WHERE products.prdid NOT IN (SELECT id FROM promotions)
+        ");
+           $ins->execute(); 
+           $ins->setFetchMode(PDO::FETCH_ASSOC); 
+           $table = $ins->fetchAll();
+           foreach ($table as $vari){
+                $lenom = $vari['productname'];
+                $leprix = number_format($vari['price'], 2,'.','');
+                $idprod = $vari['prdid'];
+                $catname = $vari['catnam'];
+                $brdname = $vari['brdname'];
+                $descrip = $vari['description'];
+                $idbran = $vari['prndmfm'];
+                $idcat = $vari['categorie'];
+                echo "
+                    <tr>
+                    <td class='border border-slate-500    p-1 pl-2 text-white'>".$idprod."</td>
+                    <td class='border border-slate-500   p-1 text-white'>".$lenom."</td>
+                    <td class='border border-slate-500   p-1 pr-2 text-white'>".$leprix."</td>
+                    <td class='border border-slate-500   p-1 pr-2 text-white'>".$catname."</td>
+                    <td class='border border-slate-500   p-1 pr-2 text-white'>1961</td>
+                    <td class='border border-slate-500   p-1 pr-2 text-white'>".$brdname."</td>
+                    <td class='border border-slate-500   p-4 text-white text-center'>
+                        <button class='w-2/3 h-8 bg-green-500 rounded-xl' onclick='editprod(\"".$idprod."\",\"".$lenom."\",\"".$leprix."\",\"".$idcat."\",\"".$idbran."\",\"".$descrip."\")'>
+                            <i class='bx bx-edit-alt'></i>
+                        </button>
+                    </td>
+                    <td class='border border-slate-500   p-4 text-white text-center'>
+                        <button class='w-2/3 h-8 bg-blue-500 rounded-xl mx-auto' onclick= 'dispchpr(".$idprod.")' '>
+                            <i class='bx bx-add-to-queue'></i>
+                        </button>
+                    </td>
+                    <td class='border border-slate-500   p-4 text-white text-center'>
+                        <button class='w-2/3 h-8 bg-red-500 rounded-xl mx-auto' onclick= 'deletef(".$idprod.")' >
+                            <i class='bx bxs-trash text-white'></i>
+                        </button></td>
+                    </tr>
+                ";
+           }
+        }
+
+        //admin clients 
+
+        function adminclient(){
+            $ins = $this->pdo->prepare("SELECT * FROM client");
+            $ins->execute();
+            $table = $ins->fetchAll();
+            foreach($table as $var){
+                $idclient = $var['id'];
+                $clientfirstname = $var['nom'];
+                $clientlastname = $var['prenom'];
+                $addr = $var['address'];
+                $clientem = $var['email'];
+                echo "
+                    <tr>
+                        <td class='border border-slate-500    p-4 pl-8 text-white '>". $idclient."</td>
+                        <td class='border border-slate-500   p-4 text-white'>".$clientlastname."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>".$clientfirstname."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>".$addr."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>". $clientem."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'><button class='w-1/3 h-8 bg-red-500 rounded-xl ml-12'><i class='bx bxs-trash text-white'></i></button></td>
+                        
+                    </tr>
+                ";
+            }
+        }
+
+
+        function adminpromotions(){
+            $ins = $this->pdo->prepare("
+                        SELECT prdid, productname,price,category.categorie as catname,brandname,newprice
+                        from products
+                        inner join promotions on promotions.id = products.prdid
+                        inner join category on category.id = products.categorie
+                        inner join brand on brand.brand_id = products.brand_id
+                        ");
+            $ins->execute();
+            $table = $ins->fetchAll();
+            foreach($table as $var){
+                $idprod = $var['prdid'];
+                $prodname = $var['productname'];
+                $orprice = $var['price'];
+                $catname = $var['catname'];
+                $brandname = $var['brandname'];
+                $newprice = $var['newprice'];
+                echo "
+                    <tr>
+                        <td class='border border-slate-500    p-4 pl-8 text-white '>". $idprod."</td>
+                        <td class='border border-slate-500   p-4 text-white'>".$prodname."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>".$catname."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>".$brandname."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>". $orprice."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'>". $newprice."</td>
+                        <td class='border border-slate-500   p-4 pr-8 text-white'><button class='w-1/3 h-8 bg-red-500 rounded-xl ml-12' onclick = 'deletef(".$idprod.")'><i class='bx bxs-trash text-white'></i></button></td>
+                    </tr>
+                ";
+            }
+        }
+
+
+
+
+
         function productsdisplayt ($table){
             $i = 1;
             foreach ($table as $vari){
