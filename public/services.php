@@ -54,7 +54,7 @@
         <div class="services_element w-2/3 mt-44 ml-12 ">
           <div class="ml-5 mt-5">
             <div class=" w-[340px] h-[480px]  bg-[rgba(255,255,255,0.2)] rounded-xl  flex flex-col items-center">
-                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="images/yellowcasque.jpeg" alt="">
+                <img class="w-[320px] h-[270px] mt-7  rounded-lg" src="./images/best_quality.png" alt="">
                 <h3 class="text-white text-4xl font-semibold mt-6">Best Quality</h3>
                <a  href="#3"><button class="  bg-[#EBDD36] mt-7 text-white text-lg font-semibold rounded-lg py-[6px] px-10   hover:bg-yellow-400">Learn more</button>
                </a> 
@@ -65,7 +65,7 @@
 
           <div class="ml-5 mt-5">
             <div class=" w-[340px] h-[480px]  bg-[rgba(255,255,255,0.2)] rounded-xl  flex flex-col items-center">
-                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="images/yellowcasque.jpeg" alt="">
+                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="./images/repair.jpg" alt="">
                 <h3 class="text-white text-4xl font-semibold mt-6">Repairing</h3>
                <a  href="#"><button class="  bg-[#EBDD36] mt-7 text-white text-lg font-semibold rounded-lg py-[6px] px-10   hover:bg-yellow-400">Learn more</button>
                </a> 
@@ -73,7 +73,7 @@
           </div>
           <div class=" ml-5 mt-1">
             <div class=" w-[340px] h-[480px]  bg-[rgba(255,255,255,0.2)] rounded-xl  flex flex-col items-center">
-                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="images/yellowcasque.jpeg" alt="">
+                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="./images/newproducts.jpg" alt="">
                 <h3 class="text-white text-3xl font-semibold mt-6">Provide Lastest <br> <span class="ml-10">products</span></h3>
                <a  href="#1"><button class="  bg-[#EBDD36] mt-7 text-white text-lg font-semibold rounded-lg py-[6px] px-10   hover:bg-yellow-400">Learn more</button>
                </a> 
@@ -83,7 +83,7 @@
 
           <div class=" ml-5 mt-1">
             <div class=" w-[340px] h-[480px]  bg-[rgba(255,255,255,0.2)] rounded-xl  flex flex-col items-center">
-                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="images/yellowcasque.jpeg" alt="">
+                <img class="w-[270px] h-[270px] mt-7  rounded-lg" src="./images/fastshipping.jpg" alt="">
                 <h3 class="text-white text-3xl font-semibold mt-6">Fast Shipping </h3>
                <a  href="#4"><button class="  bg-[#EBDD36] mt-7 text-white text-lg font-semibold rounded-lg py-[6px] px-10   hover:bg-yellow-400">Learn more</button>
                </a> 
@@ -93,6 +93,7 @@
         </div>
 
     </div>
+    <?php include './footer.php' ?>
      <?php require './DisplayCartInPages.php' ?>
     <script src="./script.js"> </script>
 </body>

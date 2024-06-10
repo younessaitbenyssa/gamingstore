@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    $id_clientt=$_SESSION['IDclient'];
+    
     class cart {
         private $pdo;
         function __construct()
@@ -37,34 +40,56 @@
                     $rowCount = $upd->rowCount();
                     echo "Number of rows updated: " . $rowCount;
                 } else {
-                    $ins = $this->pdo->prepare("INSERT INTO cart (product_cart_id, quantity) VALUES (:id, 1)");
+                    $id_clientt=$_SESSION['IDclient'];
+                    $ins = $this->pdo->prepare("INSERT INTO cart (product_cart_id, quantity,customer_id) VALUES (:id, 1,:id_clie)");
                     $ins->bindParam(':id', $decodedData);
+                    $ins->bindParam(':id_clie',$id_clientt);
                     $ins->execute();
                 }
             } catch (PDOException $e) {
                 echo "Query failed: " . $e->getMessage();
             }
         }
+
+        function remove_where_done($id){
+            try {
+                 
+                $stmt = $this->pdo->prepare('DELETE FROM cart WHERE customer_id = :id_client');
+                $stmt->bindParam(':id_client',$id, PDO::PARAM_STR);
+                $stmt->execute();
+            } catch (PDOException $e) {
+                echo 'Delete operation failed: ' . $e->getMessage();
+            }
+
+        }
+
+
         function DisplayCartData(){
             try {
-                $query = "
-                    SELECT 
-                        products.productname AS name,
-                        products.price AS price,
-                        products.imglink AS imagelink,
-                        cart.quantity AS quantity,
-                        cart.product_cart_id AS id_cart
-                    FROM 
-                        products
-                    JOIN 
-                        cart ON products.prdid = cart.product_cart_id;
-                ";
-        
-             
-                $statement = $this->pdo->query($query);
-        
-              
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $id_clii = $GLOBALS['id_clientt'];
+            $query = "
+                SELECT 
+                    products.productname AS name,
+                    products.price AS price,
+                    products.imglink AS imagelink,
+                    cart.quantity AS quantity,
+                    cart.product_cart_id AS id_cart
+                FROM 
+                    products
+                JOIN 
+                    cart ON products.prdid = cart.product_cart_id
+                WHERE
+                    cart.customer_id = :id_clii
+            ";
+
+ 
+            $statement = $this->pdo->prepare($query);
+            $statement->bindParam(':id_clii', $id_clii, PDO::PARAM_INT);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+ 
+
                 
          
                 header('Content-Type: application/json');

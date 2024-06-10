@@ -130,37 +130,11 @@
         </div>
         <div class="swiper-button-next soldbtn"><i class="fa-solid fa-chevron-right"></i></div>
         <div class="swiper-button-prev soldbtn"><i class="fa-solid fa-chevron-left"></i></div> 
-
-
- 
-
-        
+  
     </div>
     </div>
     </div>  
-      <div class="footeeeer mt-20 bg-yellow-300 w-full  ">
-        
-        <div class="ml-[20%] mt-[5%]">
-            <h5>About</h5>
-            <ul  >
-              <li class="mb-1"><a class="font-medium" href="#">Team</a></li>
-              <li class="mb-1"><a class="font-medium" href="#">Locations</a></li>
-              <li class="mb-1"><a class="font-medium" href="#">Privacy</a></li>
-              <li class="mb-1"><a class="font-medium" href="#">Terms</a></li>
-            </ul>
-        </div>
-        <div class="ml-[20%] mt-[5%]">
-            <h5>About</h5>
-            <ul  >
-              <li class="mb-1"><a class="font-medium" href="#">Team</a></li>
-              <li class="mb-1"><a class="font-medium" href="#">Locations</a></li>
-              <li class="mb-1"><a class="font-medium" href="#">Privacy</a></li>
-              <li class="mb-1"><a class="font-medium" href="#">Terms</a></li>
-            </ul>
-        </div>
-        </div>
-
-      </div>
+     <?php include './footer.php' ?>
     <?php require './DisplayCartInPages.php'  ?>
     <script src="./payment.js"></script>
     <script src="swiper-bundle.min.js"></script>

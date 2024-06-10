@@ -201,6 +201,8 @@
         font-style: italic;
     }
     .footter{
+        
+         
         background: rgb(255,241,146);
          background: linear-gradient(0deg, rgba(255,241,146,1) 0%, rgba(255,221,60,1) 23%, rgba(255,221,60,1) 52%, rgba(255,212,0,1) 81%); 
     }
@@ -456,6 +458,9 @@
     
 
     .outt {
+        display: none !important;
+    }
+    .outlog{
         display: none !important;
     }
 

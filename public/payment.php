@@ -13,7 +13,7 @@
        <div class="text-3xl text-[#EBDD36] font-bold  relative top-7 left-[40px]  ">Payment information</div>
        <div class="flex w-11/12 ml-10 mt-12">
           <div class="information_custmor flex flex-col w-1/2">
-            <form action="" method="">
+            <form action="./save_order.php" method="POST">
                <div class="text-white text-xl font-bold">Custmor information</div>
                <div class="mt-3">
                 <input type="text" name="email_payment" class="w-11/12  placeholder:text-gray-100  text-white  border-white bg-transparent rounded-[30px] focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]" placeholder="Email Address">
@@ -96,12 +96,13 @@
                     include './classes/product.php';
                     $paymentpage = new ProductOperations(0,0);
                     $paymentpage->displayPrdPaymnt();
+                    
                 ?>
             
     </div>
         </div>
         
-        
+       
     <script src="./script.js"></script>
     <script src="./payment.js"></script>
 </body>

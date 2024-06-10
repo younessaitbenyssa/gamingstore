@@ -140,8 +140,13 @@
 
 <body class="overflow-x-hidden bg-[rgb(49,49,49)]">
     <?php
+     session_start();
+     $mail=isset($_GET['mail'])? $_GET['mail']:null;
+     $_SESSION['mai_transfered']=$mail;
     require './classes/product.php';
     $allaboutprd = new ProductOperations(0, 0);
+
+    
     ?>
     <nav class="navba fixed top-0 text-white flex justify-between items-center p-4 w-screen z-50 duration-300" id="nvbar">
     <a href="./hover.php"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
@@ -161,8 +166,40 @@
             <div class="result-box"> 
             </div>
         </div>
-            <i class='bx bx-user m-auto'></i>
-                <h3>Sign in / sign up </h3>
+            <div  class="loug flex flex-col gap-0 relative "><div ><i id="user" class='bx bx-user m-auto  cursor-pointer'></i></div>
+            <div id="logg" class="outlog fixed  w-24 h-10 bg-black flex justify-center items-center cursor-pointer rounded-[15px] top-14 right-16  "><form action="./logout.php" method="POST"><button type="submit">Log out</button></form></div>
+        </div>
+           
+                 <?php 
+                  
+                  if($mail!=null){
+
+                        try {
+                            $pdo = new PDO("mysql:host=localhost;dbname=electronicsstore", "root", "");
+                        } catch (PDOException $e) {
+                            echo $e->getMessage();
+                        }
+                    
+                        $stmt = $pdo->prepare("SELECT id,nom, prenom FROM client WHERE email = :email");
+                        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                        $stmt->bindParam(':email', $mail);
+                        $stmt->execute();
+                        $table = $stmt->fetch();
+                        
+                
+                    $_SESSION['IDclient']=$table['id'];
+                    $_SESSION['nameclient']=$table['nom'];
+                    $_SESSION['prenameclient']=$table['prenom']; 
+                    echo'
+                    <h3 class="text-lg font-medium ">'.$_SESSION['nameclient'] .' '.$_SESSION['prenameclient'].'</h3>
+                    ';
+                  }
+                  else{
+                    echo'<h3 class="text-lg font-medium "><a href="./sign_in.php" class="cursor-pointer">Sign in</a>/<a href="./sing_up.html">sign up</a> </h3>';
+                  }
+                 
+                 ?>
+                
             <i class='bx bx-cart-alt hover:cursor-pointer mt-4' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
         </div>
     </nav>
@@ -451,7 +488,9 @@
         <a href="#" data-id="5">SONY</a>
     </nav>
     <div id="productContainer" class="container w-[80%] h-full mt-[3%] mx-auto"></div>
+    <?php include './footer.php' ?>
 </section>
+
     <?php include './DisplayCartInPages.php'  ?>
     <script>
     
@@ -538,6 +577,19 @@
                 prevEl: '.swiper-button-prev',
             },
         });
+    </script>
+    <script>
+         let a = document.querySelector("#logg");
+        let b = document.querySelector("#user");
+
+        function toggleLogout() {
+            if (a.classList.contains("outlog")) {
+                a.classList.remove("outlog");
+            } else {
+                a.classList.add("outlog");
+            }
+        }
+        b.addEventListener("click",toggleLogout);
     </script>
 </body>
 
