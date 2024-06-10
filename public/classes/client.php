@@ -83,7 +83,8 @@ class Client {
             ':email' => $this->getEmail(),
             ':password' => $this->getPassword()
         ]);
-            header("Location: ../hover.php");
+        $a=$this->getEmail();
+            header("Location: ../hover.php?mail=$a");
         exit();
     }
 
@@ -103,6 +104,15 @@ class Client {
             exit();
         }
     }
+    public function getname(){
+        $stmt = $this->pdo->prepare("SELECT nom,prenom FROM client WHERE email = :email");
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->bindParam(':email', $this->getEmail());
+        $stmt->execute();
+        $table = $stmt->fetch();
+        return $table;
+
+    }
 }
 
 // Registration
@@ -119,8 +129,11 @@ if ($_SESSION['verify'] == 1) {
     }
     
     if ($password === $confirm_password) {
+         
         $customer = new Client($name, $prenom, $address, $email, $password);
         $customer->save();
+        
+
     }  
 }
 

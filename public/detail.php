@@ -126,6 +126,7 @@ session_start();
                     ?>
             </div>
         </div>
+        <?php include './footer.php' ?>
         <?php include './DisplayCartInPages.php' ;?>  
     </div>
 <script src="script.js"></script>

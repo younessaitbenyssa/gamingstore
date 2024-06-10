@@ -29,12 +29,14 @@ if (isset($_POST['verify'])) {
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="flex h-screen">
-    <div class="m-auto w-[500px] h-[300px] border-black border-solid border-2">
+<div class="back_signin   overflow-hidden" >
+    <div class=" m-auto relative z-10 top-[20%] w-[400px] h-[400px] border-white rounded-2xl border-solid border-2 flex justify-center items-center">
         <form method="post" action="verify.php" class="flex flex-col gap-6">
-            <label for="verification_code">Enter Verification Code:</label>
-            <input type="text" id="verification_code" name="verification_code" class="w-[250px] mx-auto" required>
-            <button type="submit" name="verify" class="bg-[#EBDD36] w-[100px] mx-auto rounded-xl h-[30px]">Verify</button>
+            <label class=" ml-3 text-white text-xl font-semibold" for="verification_code">Enter Verification Code:</label>
+            <input type="text" id="verification_code" name="verification_code" class="w-[250px] mx-auto rounded-2xl  focus:outline-offset-0 focus:border-transparent focus:outline-[#EBDD36]"  required>
+            <button type="submit" name="verify" class="bg-[#EBDD36] w-[140px]   mx-auto rounded-2xl h-[40px] text-white font-medium">Verify</button>
         </form>
+    </div>
     </div>
 </body>
 </html>

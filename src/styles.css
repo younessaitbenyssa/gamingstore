@@ -460,5 +460,8 @@
     .outt {
         display: none !important;
     }
+    .outlog{
+        display: none !important;
+    }
 
 }
