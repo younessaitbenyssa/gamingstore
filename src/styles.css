@@ -464,4 +464,11 @@
         display: none !important;
     }
 
+    .searchadmin{
+        position: relative;
+        font-size: 25px;
+        font-weight: lighter;
+        top: 5px;
+        color: rgba(255, 255, 255, 0.8);
+    }
 }

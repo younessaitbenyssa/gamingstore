@@ -1,6 +1,5 @@
-<div class="footeeeer mt-[120px] mb-0 bg-[rgb(0,0,0)] w-full h-[533px]   ">
-        
-        <div class="w-full h-[30%] bg-[#EBDD36] flex items-center justify-between">
+<div class="absolute footeeeer mt-[120px] mb-0 bg-[rgb(0,0,0)] w-full h-[533px]   ">
+        <div class="w-full h-[30%] bg-[rgb(100,100,100)] flex items-center justify-between">
           <h1 class="text-white text-5xl font-semibold  ml-16">Follow Us</h1>
           <div class="mr-10"><i class='bx bxl-facebook-square text-white text-5xl mt-2'></i>     <i class='bx bxl-linkedin-square text-white text-5xl mt-2' ></i>    <i class='bx bxl-instagram text-white text-5xl mt-2' ></i>    <i class='bx bxl-whatsapp text-white text-5xl mt-2' ></i></div>
         </div>
@@ -40,11 +39,11 @@
             </div>
 
         </div>
-        <div class="w-full h-[12%] bg-[#EBDD36] flex items-center justify-between">
+        <div class="w-full h-[12%] bg-[rgb(100,100,100)] flex items-center justify-between">
           <h1 class="text-white text-lg  ml-4 font-normal">YAYB STORE <i class='bx bx-copyright mt-1' ></i>2024 ALL RIGHTS RESERVED</h1>
           <div class="flex gap-3 mt-2 mr-7">
-            <h2><i class='bx bxl-visa text-white text-5xl'></i></h2>
-            <h2><i class='bx bxl-mastercard text-white text-5xl' ></i></h2>
+            <h2 class=""><i class='bx bxl-visa text-[#1434CB] text-5xl'></i></h2>
+            <h2><i class='bx bxl-mastercard text-[#EB001B] text-5xl' ></i></h2>
 
         </div>
         </div>
