@@ -44,7 +44,8 @@ session_start();
             <?php
              $idnor = isset($_GET['menu'])?$_GET['menu']:null;
              $idp =isset($_GET['idcat'])?$_GET['idcat']:null ;
-             if($idnor!=3){
+             $testty = isset($_GET['fff'])?$_GET['fff']:null; 
+             if($idnor!=3 && $testty!=4 ){
                 if($idp==1){
                     $pathing="images/rog.png";
                 }
@@ -61,6 +62,7 @@ session_start();
     
         $idp =isset($_GET['idcat'])?$_GET['idcat']:null ;
         $idbr = isset($_GET['idbrand'])?$_GET['idbrand']:null;
+         
         
         $brand_name=isset($_GET['brand_name'])?$_GET['brand_name']:null;
         // $brand_id=isset($_GET['id_brand'])?$_GET['id_brand']:null;
@@ -68,8 +70,8 @@ session_start();
         $dispromotion  = new ProductOperations($idp,$idbr);
         //here o means that it's coming from a filter apply
         $selectedBrands = '';
-        if ($idnor != 0 && $idnor!=3){
-            $selectedBrands = $_GET['brands'] ?  $_GET['brands']:null;
+        if (($idnor != 0 && $idnor!=3) ){
+            $selectedBrands = isset($_GET['brands']) ?  $_GET['brands']:null;
             $minpr = $_GET['min_price'];
             $maxpr = $_GET['max_price'];
             $_SESSION['min'] = $minpr;
@@ -82,7 +84,7 @@ session_start();
     ?>
          <div class="flex flex-col justify-center items-center">
             <?php
-                if($idnor == 3){
+                if($idnor == 3 || $testty==4){
                     if($brand_name=='Razer'){
                         $path='images/image-removebg-preview.png'; 
         
@@ -117,7 +119,7 @@ session_start();
     <div class="swiper mySwiper">
         <div class="swiper-wrapper">
             <?php
-                if($idnor==3){
+                if($idnor==3 || $testty==4){
                     $dispromotion->dispromoAll();
                 }
                 else{
@@ -135,8 +137,8 @@ session_start();
                <h3 class="text-white text-4xl font-semibold">Brand</h3>
             </div>
             <?php
-                if($idnor==3){
-                    $dispromotion->displayfilerbrands_from_hover();
+                if($idnor==3 || $testty==4){
+                     
                  }
                  else{
                     $dispromotion->displayfilerbrands($selectedBrands);
@@ -168,6 +170,7 @@ session_start();
                 <input type="hidden" name="idcat" value="<?php echo $idp; ?>">
                 <input type="hidden" name="idbrand" value="<?php echo $idbr; ?>">
                 <input type="hidden" name="menu" value="1">
+                <input type="hidden" name="fff" value="<?php echo $testty; ?>">
            <div class=" mt-16 ml-[20%] ">
            <input type="submit" name="filt" value="Apply filter" id="filter_applyed" class="bg-[#EBDD36] hover:bg-yellow-500 text-center text-2xl font-semibold text-white px-[10%] py-1 rounded-[20px]">         
                </button>
@@ -181,9 +184,11 @@ session_start();
                    $dispromotion->displayproducts();
                 }
                 elseif($idnor == 3){
-                    $dispromotion->DisplayBrand($idbr);
+                    $dispromotion->DisplayBrandall($idbr);
                 }
-                
+                elseif($testty==4){
+                    $dispromotion->diplay_filter_price($minpr,$maxpr,$idbr);
+                }
                 else{
                     $dispromotion->displayfiltredproducts($minpr,$maxpr,$selectedBrands);
                 }

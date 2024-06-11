@@ -1688,16 +1688,16 @@ input[type="range"]::-webkit-slider-thumb{
   top: 37%;
 }
 
-.top-\[450px\]{
-  top: 450px;
-}
-
 .top-\[48\%\]{
   top: 48%;
 }
 
 .top-\[50\%\]{
   top: 50%;
+}
+
+.top-\[500px\]{
+  top: 500px;
 }
 
 .top-\[51\%\]{
@@ -1730,10 +1730,6 @@ input[type="range"]::-webkit-slider-thumb{
 
 .top-\[90px\]{
   top: 90px;
-}
-
-.top-\[500px\]{
-  top: 500px;
 }
 
 .z-10{
