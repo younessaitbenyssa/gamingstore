@@ -76,17 +76,27 @@
             $tab = $nameis->fetch();
             echo "<h3 class='text-4xl px-auto font-bold '>Gaming ".$value = $tab['categorie']."</h3>";
         } 
-        function displayfilerbrands (){
-            $ins = $this->pdo->prepare("SELECT DISTINCT brandname from brand INNER JOIN products ON brand.brand_id = products.brand_id 
+        function displayfilerbrands ($table){
+            $ins = $this->pdo->prepare("SELECT DISTINCT brandname,brand.brand_id from brand INNER JOIN products ON brand.brand_id = products.brand_id 
             where products.categorie = ?");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($this->idp));
             $tablo = $ins->fetchAll();
             foreach ($tablo as $varo){
             $brdname = $varo['brandname'];
+            $id = $varo['brand_id'];
+            if (is_array($table) && !empty($table)) {
+                if (in_array($id, $table)) {
+                    $str = "checked";
+                } else {
+                    $str = "unchecked";
+                }
+            } else {
+                $str = "unchecked";
+            }
             echo "
             <div class='mt-5 ml-[6%]'>
-            <input type='checkbox' class=' bg-transparent rounded-[3px] border-white   accent-[#EBDD36]' />
+            <input type='checkbox' name='brands[]' class='bg-transparent rounded-[3px] border-white checked:text-[#EBDD36]' value='".$id."' ".$str." />
             <span class='text-white hover:text-[#EBDD36] text-xl  mt-1'>".$brdname."</span>
             </div>
             ";
@@ -114,11 +124,20 @@
             $table = $ins->fetchAll();
             $this->productsdisplayt($table);
         }
-        function displayfiltredproducts ($minpr,$maxpr){
-            $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ? and prdid not in (select id from promotions)");
-            $ins->setFetchMode(PDO::FETCH_ASSOC); 
-            $ins->execute(array($this->idp, $this->idbr, $minpr,$maxpr));
-            $table = $ins->fetchAll();
+        function displayfiltredproducts ($minpr,$maxpr,$selected){
+            if ($selected!==null){
+                $placeholders = implode(',', array_fill(0, count($selected), '?'));
+                $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id in ($placeholders) AND price BETWEEN ? AND ? and prdid not in (select id from promotions)");
+                $ins->setFetchMode(PDO::FETCH_ASSOC); 
+                $params = array_merge([$this->idp], $selected, [$minpr, $maxpr]);
+                $ins->execute($params);
+                $table = $ins->fetchAll();
+            }else{
+                $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE categorie = ? AND brand_id = ? AND price BETWEEN ? AND ? and prdid not in (select id from promotions)");
+                $ins->setFetchMode(PDO::FETCH_ASSOC); 
+                $ins->execute(array($this->idp, $this->idbr, $minpr,$maxpr));
+                $table = $ins->fetchAll();
+            }
             $this->productsdisplayt($table);
         } 
         function DisplayAll (){

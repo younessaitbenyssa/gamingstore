@@ -66,11 +66,15 @@ session_start();
         // $brand_id=isset($_GET['id_brand'])?$_GET['id_brand']:null;
         include './classes/product.php';
         $dispromotion  = new ProductOperations($idp,$idbr);
+        //here o means that it's coming from a filter apply
+        $selectedBrands = '';
         if ($idnor != 0 && $idnor!=3){
+            $selectedBrands = $_GET['brands'] ?  $_GET['brands']:null;
             $minpr = $_GET['min_price'];
             $maxpr = $_GET['max_price'];
             $_SESSION['min'] = $minpr;
             $_SESSION['max'] = $maxpr;
+            $_SESSION['brnadtab'] = $selectedBrands;
         }else{
             $_SESSION['min'] = 2500;
             $_SESSION['max'] = 7500;
@@ -131,13 +135,12 @@ session_start();
                <h3 class="text-white text-4xl font-semibold">Brand</h3>
             </div>
             <?php
-                 if($idnor==3){
+                if($idnor==3){
                     $dispromotion->displayfilerbrands_from_hover();
                  }
                  else{
-                    $dispromotion->displayfilerbrands();
+                    $dispromotion->displayfilerbrands($selectedBrands);
                  }
-                
             ?>
           <div class="ml-[6%]  mt-6">
            <h4 class="text-white text-4xl font-semibold">Price</h4>
@@ -166,7 +169,7 @@ session_start();
                 <input type="hidden" name="idbrand" value="<?php echo $idbr; ?>">
                 <input type="hidden" name="menu" value="1">
            <div class=" mt-16 ml-[20%] ">
-           <input type="submit" value="Apply filter" id="filter_applyed" class="bg-[#EBDD36] hover:bg-yellow-500 text-center text-2xl font-semibold text-white px-[10%] py-1 rounded-[20px]">         
+           <input type="submit" name="filt" value="Apply filter" id="filter_applyed" class="bg-[#EBDD36] hover:bg-yellow-500 text-center text-2xl font-semibold text-white px-[10%] py-1 rounded-[20px]">         
                </button>
            </div>
         </form>
@@ -182,7 +185,7 @@ session_start();
                 }
                 
                 else{
-                    $dispromotion->displayfiltredproducts($minpr,$maxpr);
+                    $dispromotion->displayfiltredproducts($minpr,$maxpr,$selectedBrands);
                 }
                     ?>
             </div>
