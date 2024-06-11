@@ -490,10 +490,7 @@
     <div id="productContainer" class="container w-[80%] h-full mt-[3%] mx-auto"></div>
 </section>
 <?php include './DisplayCartInPages.php'  ?>
-
-<section class="h-screen w-screen">
     <?php include './footer.php' ?>
-</section>
     <script>
     
       document.querySelectorAll('.naviframe a').forEach(link => {

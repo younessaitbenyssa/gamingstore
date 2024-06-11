@@ -471,4 +471,158 @@
         top: 5px;
         color: rgba(255, 255, 255, 0.8);
     }
+    /* this is for the footeer */
+
+    .footer img{
+        position: relative;
+        width: 200px;
+        height: 200px;
+    }
+
+    .footer i{
+        transition: .4s;
+    }
+    .footer{
+        position: absolute;
+        border: 1px solid;
+        /* background: rgb(37, 39, 43); */
+        margin: 0;
+        color: white;
+        height: 370px;
+    }
+
+    .kolchi{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        column-gap: 8%;
+        margin-right: 60px;
+    }
+    @media (max-width:527px){
+        .resum, .kolchi img{
+          width: 100%;
+          padding-left: 30px;
+        }
+    }
+
+    @media (max-width:768px){
+        .kolchi img{
+          width: 50%;
+        }
+      }
+
+
+    .resum{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .resum i{
+        margin-top: 20px;
+    }
+    .resum h2::after{
+        content: '';
+        top: 10px;
+        width: 100px;
+        position: relative;
+        display: block;
+        height: 2px;
+        background: rgb(234, 166, 100);
+    }
+    .resum a{
+        margin-top: 20px;
+        text-decoration: none;
+        color: white;
+        transition: .4s;
+      
+    }
+
+
+    .line{
+        position: relative;
+        margin-top: 20px;
+        grid-column: span 4;
+        height: 0;
+        margin-left: 10%;
+        width: 80%;
+        border: 1px solid;
+    }
+    
+    .line2{
+        position: relative;
+        margin-top: 20px;
+        grid-column: span 4;
+        height: 0;
+        margin-left: 10%;
+        width: 70%;
+        border: 1px solid;
+    }
+
+
+    .follow h2::after{
+        content: '';
+        top: 10px;
+        position: relative;
+        display: block;
+        height: 2px;
+        width: 60%;
+        background: rgb(234, 166, 100);
+    }
+
+    .follow{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        align-items: center;
+        grid-column: span 4;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .follow .acont{
+        position: relative;
+        top: 1rem;
+        display: flex;
+        width: 300px;
+        justify-content: center;
+    }
+    .follow .acont i{
+        font-size: 20px;
+    }
+
+    .acont a{
+        position: relative;
+        background: rgb(79, 83, 91);
+        color: #ededed;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 40px;
+        width: 40px;
+        height: 40px;
+        border: 2px solid;
+        border-radius: 50%;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .acont a::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: rgb(234, 166, 100);
+        overflow: hidden;
+        z-index: -1;
+        transition: .6s;
+    }
+    .acont a:hover::before{
+        width: 100%;
+    }
+    .acont a:hover{
+        color: white;
+    }
 }
