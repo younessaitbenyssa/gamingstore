@@ -256,10 +256,6 @@
             }
         }
 
-
-
-
-
         function productsdisplayt ($table){
             $i = 1;
             foreach ($table as $vari){
