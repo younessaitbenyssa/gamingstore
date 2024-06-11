@@ -1,4 +1,4 @@
-<section class="relative h-[80%]  top-[450px]">
+<section class="relative h-[80%]  top-[500px]">
   <div class="footer w-screen bg-[#ffffff33] bottom-0" id="fft">
             <div class="kolchi">
                     <img src="./images/logo.png" alt="">

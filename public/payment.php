@@ -96,10 +96,11 @@
                     include './classes/product.php';
                     $paymentpage = new ProductOperations(0,0);
                     $paymentpage->displayPrdPaymnt();
-                    
+
                 ?>
             
-    </div>
+         </div>
+        </div>
         </div>
         
        
