@@ -167,13 +167,15 @@
             </div>
         </div>
             <div  class="loug flex flex-col gap-0 relative "><div ><i id="user" class='bx bx-user m-auto  cursor-pointer mt-2'></i></div>
-            <div id="logg" class="outlog fixed  w-24 h-10 bg-black flex justify-center items-center cursor-pointer rounded-[15px] top-14 right-16  "><form action="./logout.php" method="POST"><button type="submit">Log out</button></form></div>
+            <div id="logg" class="outlog fixed  w-24 h-10 bg-black flex justify-center items-center cursor-pointer rounded-[15px] top-14 right-16  ">
+                <form action="./logout.php" method="POST"><button type="submit">Log out</button>
+            </form>
+        </div>
         </div>
            
                  <?php 
                   
                   if($mail!=null){
-
                         try {
                             $pdo = new PDO("mysql:host=localhost;dbname=electronicsstore", "root", "");
                         } catch (PDOException $e) {
@@ -475,11 +477,11 @@
     <section class="h-screen">
     <nav class="naviframe relative mt-[5%] text-white flex gap-10 text-xl left-[10%]">
         <a href="#" data-id="0" class="selected">TOUS</a>
-        <a href="#" data-id="1">HYPERX</a>
+        <a href="#" data-id="5">HYPERX</a>
         <a href="#" data-id="2">LOGITECH</a>
         <a href="#" data-id="3">RAZER</a>
-        <a href="#" data-id="4">ASUS</a>
-        <a href="#" data-id="5">SONY</a>
+        <a href="#" data-id="1">ASUS</a>
+        <a href="#" data-id="4">SONY</a>
     </nav>
     <div id="productContainer" class="container w-[80%] h-full mt-[3%] mx-auto"></div>
 </section>

@@ -93,8 +93,8 @@ class Client {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->bindParam(':email', $this->getEmail());
         $stmt->execute();
-        
         $table = $stmt->fetch();
+        $_SESSION['IDclient']=$table['id'];
          $a=$this->getEmail();
         if ($table && password_verify($this->password, $table['password'])) {
             header("Location: ../hover.php?mail=$a");

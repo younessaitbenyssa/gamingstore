@@ -135,12 +135,12 @@ session_start();
                <h3 class="text-white text-4xl font-semibold">Brand</h3>
             </div>
             <?php
-                if($idnor==3){
+                if($idnor == 3){
                     $dispromotion->displayfilerbrands_from_hover();
-                 }
-                 else{
+                }
+                else{
                     $dispromotion->displayfilerbrands($selectedBrands);
-                 }
+                }
             ?>
           <div class="ml-[6%]  mt-6">
            <h4 class="text-white text-4xl font-semibold">Price</h4>

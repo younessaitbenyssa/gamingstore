@@ -10,6 +10,7 @@
     <title>Payment</title>
 </head>
 <body class="overflow-x-hidden" style="background-color: rgb(49, 49, 49);"> 
+    <?php session_start() ?>
        <div class="text-3xl text-[#EBDD36] font-bold  relative top-7 left-[40px]  ">Payment information</div>
        <div class="flex w-11/12 ml-10 mt-12">
           <div class="information_custmor flex flex-col w-1/2">
@@ -93,17 +94,16 @@
              </div>
             <div class="overflow-y-auto h-[400px] no-scrollbar mr-2">
                 <?php
+                    $id = $_SESSION['IDclient'];
                     include './classes/product.php';
                     $paymentpage = new ProductOperations(0,0);
-                    $paymentpage->displayPrdPaymnt();
+                    $paymentpage->displayPrdPaymnt($id);
 
                 ?>
             
          </div>
         </div>
         </div>
-        
-       
     <script src="./script.js"></script>
     <script src="./payment.js"></script>
 </body>

@@ -298,7 +298,7 @@
             $i++;
             }
         } 
-        function displayPrdPaymnt (){
+        function displayPrdPaymnt ($id){
             $query = "
             SELECT 
             products.productname AS name,
@@ -310,10 +310,10 @@
             products
             JOIN 
             cart ON products.prdid = cart.product_cart_id;
+            where customer_id = ?
             ";
-            $statement = $this->pdo->query($query);
-
-     
+            $statement = $this->pdo->prepare($query);
+            $statement->execute([$id]);
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             $total=0;
             foreach ($result as $vari) {
@@ -421,8 +421,42 @@
             $ins->execute();
             $result = $ins->fetchAll(PDO::FETCH_ASSOC);
             return $result;
+       }
 
-
+       function topsellers(){
+            $ins = $this->pdo->prepare("
+                                        SELECT products.productname as prod,
+                                        products.price as prix,
+                                        products.imglink as link,
+                                        SUM(quantity) AS total_quantity_sold 
+                                        FROM commande_produits 
+                                        INNER JOIN products 
+                                        ON commande_produits.product_id = products.prdid 
+                                        GROUP BY product_id 
+                                        ORDER BY total_quantity_sold DESC LIMIT 3;");
+            $ins->execute();
+            $table = $ins->fetchAll();
+            foreach ($table as $vari){
+                $profit = $vari['total_quantity_sold']*$vari['prix'];
+                echo "
+                      <div class='flex justify-around w-[900px] h-[60px]  items-center'>
+                <div class='flex gap-2 w-[225px] '>
+                    <img src='images/".$vari['link']."'  class='w-[50px] h-[50px]'>
+                    <h1 class='text-xl text-white'>".$vari['prod']."</h1>
+                </div>
+                <div class='w-[225px]'>
+                    <h1 class='text-xl text-white text-center'>".$vari['prix']." MAD</h1>
+                </div>
+                <div class='w-[225px]'>
+                    <h1 class='text-xl text-green-500 text-center'>".$vari['total_quantity_sold']."</h1>
+                </div>
+                <div class='w-[225px]'>
+                    <h1 class='text-xl text-blue-500 text-center'>".$profit." MAD</h1>
+                </div>
+                </div>
+                <div class='line mx-auto w-[88%]' style='color: rgb(71 85 105);'></div>
+                ";
+            }
        }
        
     }

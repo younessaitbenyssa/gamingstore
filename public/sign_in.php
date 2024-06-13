@@ -7,7 +7,10 @@
     <title>Document</title>
 </head>
 <body> 
-     
+    <?php
+        session_start();
+        $_SESSION['verify'] = 10;
+    ?>
  
      <div class="back_signin py-14" >
 
