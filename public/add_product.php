@@ -6,7 +6,7 @@
         $descrip = $_POST['desc'];
         $categ = $_POST['category'];
         $brnd = $_POST['brand'];
-        $imglink = ''; // Initialize variable for file path or URL
+        $imglink = ''; 
         if ($brnd == 1){
             $brpath = "Asus";
         }
@@ -50,7 +50,7 @@
         move_uploaded_file($_FILES['imag']['tmp_name'], $uploadPath);
         }
 
-        $brnd = $_POST['brand']; // Get selected brand
+        $brnd = $_POST['brand']; 
 
         try {
             $pdo  = new PDO("mysql:host=localhost;dbname=electronicsstore","root","");

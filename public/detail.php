@@ -138,7 +138,12 @@ session_start();
             </div>
             <?php
                 if($idnor == 3 || $testty==4){
-                    $dispromotion->displayfilerbrands_from_hover();
+                    echo "
+                        <div class='mt-5 ml-[6%]'>
+                        <input type='checkbox' class=' bg-transparent rounded-[3px] border-white   checked:text-[#EBDD36]' checked />
+                        <span class='text-white hover:text-[#EBDD36] text-xl  mt-1'>".$brand_name."</span>
+                        </div>
+                        ";
                 }
                 else{
                     $dispromotion->displayfilerbrands($selectedBrands);

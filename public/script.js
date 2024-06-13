@@ -105,8 +105,6 @@ function displaycart2() {
             total = total + item.price * item.quantity;
             quantitySum += item.quantity;
             crtico.innerHTML = quantitySum;
-            // var links = decodeURIComponent(item["imagelink"].replace(/\+/g, ' '));
-            // image= "images/" + links;
             return `
                 <div class='cart-item'>
                     <div class='row-img'>
@@ -182,27 +180,15 @@ function sendToCartTableExist(object_vari) {
 function addtocart(index, name, prix, link) {
     var nom = decodeURIComponent(name.replace(/\+/g, ' '));
     var links = decodeURIComponent(link.replace(/\+/g, ' '));
-    const existingitem=cart.find(item=>item.id===index);
-    if(existingitem){
-        existingitem.quantity++;
-        let existOBJ=({
-            id:index,
-            name:"a"
-        });
-        sendToCartTableExist(existOBJ);  
-    }
-    else{
-        var item =({
-            id: index,
-            name: nom,
-            price: prix,
-            image: "images/" + links,
-            quantity:1
-        });
-        cart.push(item);
-        console.log(cart);
-        sendToCartTable(item);   
-    }
+    var item =({
+        id: index,
+        name: nom,
+        price: prix,
+        image: "images/" + links,
+        quantity:1
+    });
+    console.log(item);
+    sendToCartTable(item);   
     booom();
     displaycart2();
     booom();
@@ -210,11 +196,9 @@ function addtocart(index, name, prix, link) {
 
 
 function deleteElement(index) {
-    console.log("Deleting element at index:", index);
     if (index >= 0 && index < cart.length) {
         let id_wanna_remove = cart[index].id_cart;
         cart.splice(index, 1);
-        console.log("Cart after deletion:", cart);
         booom();
         displaycart2();
         booom();
@@ -255,7 +239,6 @@ if (availablekeywors.length == 0){
                 categ: product.categorie
             }));
 
-            console.log(availablekeywors);
         })
         .catch(error => console.error('Error fetching data:', error));
 }
@@ -273,7 +256,6 @@ inputBox.onkeyup = function(){
         result = availablekeywors.filter((keyword)=>{
             return keyword.name.toLowerCase().includes(input.toLocaleLowerCase());
         });
-        console.log(result);
     }
     display(result);
     if (!result.length){
@@ -285,14 +267,11 @@ inputBox.onkeyup = function(){
 
 function display(result){
     const content = result.map((list)=>{
-        // let links = list.link;
-        // inks = decodeURIComponent(links.replace(/\%/g, ' '));
         return "<a href = 'description.php?idprd="+list.id+"&cate="+list.categ+"'><li onclick='selectInput(\""+list.name+"\")' class='searchbar'> <img src='./images/"+list.link+"'>  <h1 class='h1div'>" + list.name + "</h1></li> </a>";
     });
     resultsBox.innerHTML = "<ul>" + content.join('') +  "</ul>";
 }
 function selectInput(list){
-    // console.log(list);
     inputBox.value = list;
     resultsBox.innerHTML = '';
 }
@@ -310,4 +289,17 @@ document.querySelectorAll('.prdcnt').forEach(container => {
         window.top.location.href = 'description.php?idprd=' + productId+'&cate='+productCat;
     });
 });
+
+let a = document.querySelector("#logg");
+        let b = document.querySelector("#user");
+
+        function toggleLogout() {
+            if (a.classList.contains("outlog")) {
+                a.classList.remove("outlog");
+            } else {
+                a.classList.add("outlog");
+            }
+        }
+b.addEventListener("click",toggleLogout);
+
 

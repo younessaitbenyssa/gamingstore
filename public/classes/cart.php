@@ -19,31 +19,29 @@
                 $stmt = $this->pdo->prepare("DELETE FROM cart WHERE product_cart_id = :id");
                 $stmt->bindParam(':id', $decodedData);
                 $stmt->execute();
-                // Return a JSON response to indicate success
                 echo json_encode(["success" => true, "message" => "Item deleted successfully"]);
             } catch (PDOException $e) {
-                // Handle any database errors and return an error response
                 echo json_encode(["success" => false, "message" => "Database error: " . $e->getMessage()]);
             }
         }
         function AddAndModifyCart ($decodedData){
             try {
-                $ins = $this->pdo->prepare("SELECT product_cart_id FROM cart WHERE product_cart_id = :id");
+                $ins = $this->pdo->prepare("SELECT product_cart_id FROM cart WHERE product_cart_id = :id and customer_id = :cost");
                 $ins->bindParam(':id', $decodedData);
+                $ins->bindParam(':cost', $_SESSION['IDclient']);
                 $ins->execute();
                 $existingCartEntry = $ins->fetch(PDO::FETCH_ASSOC);
-        
                 if ($existingCartEntry) {
-                    $upd = $this->pdo->prepare("UPDATE cart SET quantity = quantity + 1 WHERE product_cart_id = :id");
+                    $upd = $this->pdo->prepare("UPDATE cart SET quantity = quantity + 1 WHERE product_cart_id = :id and  customer_id = :cost");
                     $upd->bindParam(':id', $decodedData);
+                    $upd->bindParam(':cost', $_SESSION['IDclient']);
                     $upd->execute();
                     $rowCount = $upd->rowCount();
                     echo "Number of rows updated: " . $rowCount;
                 } else {
-                    $id_clientt=$_SESSION['IDclient'];
                     $ins = $this->pdo->prepare("INSERT INTO cart (product_cart_id, quantity,customer_id) VALUES (:id, 1,:id_clie)");
                     $ins->bindParam(':id', $decodedData);
-                    $ins->bindParam(':id_clie',$id_clientt);
+                    $ins->bindParam(':id_clie', $_SESSION['IDclient']);
                     $ins->execute();
                 }
             } catch (PDOException $e) {

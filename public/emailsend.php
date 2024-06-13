@@ -26,12 +26,11 @@ if (isset($_POST['signup'])){
     $mail->Password = 'xgms rmgj mpsy erkp'; // Update with your actual Gmail password
     $mail->SMTPSecure = 'tls'; // Use tls, not ssl
     $mail->Port = 587; // Gmail SMTP port (TLS)
-    echo $_POST['Email'];
     $mail->setFrom('tiynitamot@gmail.com');
     $mail->addAddress($_POST['Email']);
     $mail->isHTML(true);
     $mail->Subject = "complete you signup";
-    $mail->Body = "Your verification code is: " . $verificationCode;
+    $mail->Body = "Hello ".$_POST['Firstname']." <br> Your verification code To complete your signup is: " . $verificationCode;
     
     try {
         $mail->send();

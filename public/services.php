@@ -10,6 +10,8 @@
     <title>services</title>
 </head>
 <body class="bg-[rgb(49,49,49)]">
+    
+    <?php session_start() ?>
    <?php require './nav.php'?>
     <div class="our_services flex justify-around w-11/12 ml-10">
         <div class="services_describe  w-1/3 mt-36 ml-11">

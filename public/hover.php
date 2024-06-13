@@ -140,21 +140,20 @@
 
 <body class="overflow-x-hidden bg-[rgb(49,49,49)]">
     <?php
-     session_start();
-     $mail=isset($_GET['mail'])? $_GET['mail']:null;
-     $_SESSION['mai_transfered']=$mail;
+    session_start();
+    $mail=isset($_GET['mail'])? $_GET['mail']:null;
+    $_SESSION['mai_transfered']=$mail;
     require './classes/product.php';
     $allaboutprd = new ProductOperations(0, 0);
 
-    
     ?>
     <nav class="navba fixed top-0 text-white flex justify-between items-center p-4 w-screen z-50 duration-300" id="nvbar">
     <a href="./hover.php"><img class="relative top-0 left-0 w-[70px] h-[50px] hover:cursor-pointer" src="images/logo.png" alt=""></a>
     <div class="flex gap-10 font-medium">
         <a class="niv" href="./hover.php">Home</a>
-        <a class="niv" href="">About</a>
-        <a class="niv" href="">Contact</a>
-        <a class="niv" href="">Products</a>
+        <a class="niv" href="./aboutus.php">About</a>
+        <a class="niv" href="#foooter">Contact</a>
+        <a class="niv" href="#productsss">Products</a>
         <a class="niv" href="services.php">Services</a>
     </div>
     <div class="flex mr-6 gap-6 items-center">
@@ -166,41 +165,24 @@
             <div class="result-box"> 
             </div>
         </div>
-            <div  class="loug flex flex-col gap-0 relative "><div ><i id="user" class='bx bx-user m-auto  cursor-pointer mt-2'></i></div>
-            <div id="logg" class="outlog fixed  w-24 h-10 bg-black flex justify-center items-center cursor-pointer rounded-[15px] top-14 right-16  ">
+        <div  class="loug flex flex-col gap-0 relative ">
+                <div >
+                    <i id="user" class='bx bx-user m-auto  cursor-pointer mt-2'></i>
+                </div>
+            <div id="logg" class="outlog fixed  w-24 h-10 bg-black flex justify-center items-center cursor-pointer rounded-[15px] top-14 right-16">
                 <form action="./logout.php" method="POST"><button type="submit">Log out</button>
-            </form>
+                </form>
+            </div>
         </div>
-        </div>
-           
-                 <?php 
-                  
-                  if($mail!=null){
-                        try {
-                            $pdo = new PDO("mysql:host=localhost;dbname=electronicsstore", "root", "");
-                        } catch (PDOException $e) {
-                            echo $e->getMessage();
-                        }
-                    
-                        $stmt = $pdo->prepare("SELECT id,nom, prenom FROM client WHERE email = :email");
-                        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                        $stmt->bindParam(':email', $mail);
-                        $stmt->execute();
-                        $table = $stmt->fetch();
-                        
-                
-                    $_SESSION['IDclient']=$table['id'];
-                    $_SESSION['nameclient']=$table['nom'];
-                    $_SESSION['prenameclient']=$table['prenom']; 
+                <?php 
+                    if(isset($_SESSION['IDclient'])){
                     echo'
                     <h3 class="text-lg font-medium ">'.$_SESSION['nameclient'] .' '.$_SESSION['prenameclient'].'</h3>
-                    ';
-                  }
-                  else{
+                    ';     
+                    }else{ 
                     echo'<h3 class="text-lg font-medium "><a href="./sign_in.php" class="cursor-pointer">Sign in</a>/<a href="./sing_up.html">sign up</a> </h3>';
-                  }
-                 
-                 ?>
+                    }
+                ?>
                 
             <i class='bx bx-cart-alt hover:cursor-pointer mt-6' onclick="appearcart()"><div class="relative left-[12px] top-[-6px] text-xs w-[17px] h-[17px] bg-red-600 rounded-[50%] text-center font-bold" id="cartico"></div></i>
         </div>
@@ -475,7 +457,7 @@
              ?>
         </div>
     </section>
-    <section class="h-screen">
+    <section class="h-screen" id="productsss">
     <nav class="naviframe relative mt-[5%] text-white flex gap-10 text-xl left-[10%]">
         <a href="#" data-id="0" class="selected">TOUS</a>
         <a href="#" data-id="5">HYPERX</a>
@@ -517,9 +499,15 @@
     <script src="swiper-bundle.min.js"></script>
     <script>
         window.addEventListener("scroll", function() {
-            var header = document.getElementById("nvbar");
-            header.classList.toggle("sticky", window.scrollY > 0);
-        })
+    var header = document.getElementById("nvbar");
+    header.classList.toggle("sticky", window.scrollY > 0);
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    var header = document.getElementById("nvbar");
+    header.classList.toggle("sticky", window.scrollY > 0);
+    });
+
 
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 1,
@@ -572,19 +560,6 @@
                 prevEl: '.swiper-button-prev',
             },
         });
-    </script>
-    <script>
-         let a = document.querySelector("#logg");
-        let b = document.querySelector("#user");
-
-        function toggleLogout() {
-            if (a.classList.contains("outlog")) {
-                a.classList.remove("outlog");
-            } else {
-                a.classList.add("outlog");
-            }
-        }
-        b.addEventListener("click",toggleLogout);
     </script>
 </body>
 

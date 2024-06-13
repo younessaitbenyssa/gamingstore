@@ -463,6 +463,9 @@
     .outlog{
         display: none !important;
     }
+    /* html {
+        scroll-behavior: smooth;
+    } */
 
     .searchadmin{
         position: relative;
@@ -624,5 +627,15 @@
     }
     .acont a:hover{
         color: white;
+    }
+    .image_about::before{
+        content: '';
+           position: absolute;
+           width: 1370px;
+           height:100%;
+           top: 0;
+           left: 0;
+           background-color: rgba(0, 0, 0, 0.4);
+           z-index: 2;
     }
 }

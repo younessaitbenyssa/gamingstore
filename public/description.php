@@ -34,7 +34,10 @@
 </head>
 <body style="background-image: url('./images/back_ground\ -\ Copy.jpg');">
     <div class="fixed z-10 top-0 left-0 w-screen">
-        <?php  require 'nav.php'  ?>
+        <?php 
+            session_start(); 
+            require 'nav.php'  
+        ?>
     </div>
     <?php
         $id=$_GET['idprd'];

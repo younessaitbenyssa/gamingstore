@@ -89,16 +89,24 @@ class Client {
     }
 
     public function test_exist_client() {
-        $stmt = $this->pdo->prepare("SELECT * FROM client WHERE email = :email");
+        $stmt = $this->pdo->prepare("SELECT id,nom,prenom,address,password FROM client WHERE email = :email");
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $stmt->bindParam(':email', $this->getEmail());
         $stmt->execute();
         $table = $stmt->fetch();
         $_SESSION['IDclient']=$table['id'];
-         $a=$this->getEmail();
+        $a=$this->getEmail();
         if ($table && password_verify($this->password, $table['password'])) {
-            header("Location: ../hover.php?mail=$a");
-            exit();
+            $_SESSION['IDclient']=$table['id'];
+            $_SESSION['nameclient']=$table['nom'];
+            $_SESSION['prenameclient']=$table['prenom'];
+            if ($this->getEmail() == "aichamoh2003@gmail.com"){
+                header("Location: ../admin_choose_page.php?mail=$a");
+                exit();
+            }else{
+                header("Location: ../hover.php?mail=$a");
+                exit();
+            }
         } else {
             header("Location: ../sign_in.php");
             exit();

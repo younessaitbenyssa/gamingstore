@@ -58,19 +58,5 @@
             ?>
         </div>
     </div>
-    <script>
-        let a = document.querySelector("#out");
-        let b = document.querySelectorAll(".ppp");
-
-        function toggleLogout() {
-            if (a.classList.contains("outt")) {
-                a.classList.remove("outt");
-            } else {
-                a.classList.add("outt");
-            }
-        }
-        for (let i = 0; i < b.length; i++) 
-            b[i].addEventListener("click", toggleLogout);
-    </script>
 </body>
 </html>

@@ -21,6 +21,7 @@
                                 productname,
                                 products.price AS price,
                                 promotions.newprice AS promoprice,
+                                products.categorie AS catego,
                                 imglink 
                                 FROM products INNER JOIN promotions 
                                 ON products.prdid = promotions.id 
@@ -38,6 +39,7 @@
                                 productname,
                                 products.price AS price,
                                 promotions.newprice AS promoprice,
+                                products.categorie AS catego,
                                 imglink 
                                 FROM products INNER JOIN promotions 
                                 ON products.prdid = promotions.id 
@@ -54,7 +56,7 @@
             echo 
             "
             <div class='swiper-slide promoappearsatall'>
-            <a href = 'description.php?idprd=".$var['id']."&cate=".$this->idp."&promoprice=".$var['promoprice']."'>
+            <a href = 'description.php?idprd=".$var['id']."&cate=".$var['catego']."&promoprice=".$var['promoprice']."'>
                 <div class='prdcnt'>
                     <div class='absolute text-white bg-red-600  text-xl text-center right-0 rotate-45 w-28  translate-x-7 top-3'>Sold</div>
                     <div class='produit'>
@@ -322,20 +324,22 @@
         function displayPrdPaymnt ($id){
             $query = "
             SELECT 
-            products.productname AS name,
-            products.price AS price,
-            products.imglink AS imagelink,
-            cart.quantity AS quantity,
-            cart.product_cart_id AS id_cart
+                products.productname AS name,
+                products.price AS price,
+                products.imglink AS imagelink,
+                cart.quantity AS quantity,
+                cart.product_cart_id AS id_cart
             FROM 
-            products
-            JOIN 
-            cart ON products.prdid = cart.product_cart_id;
-            where customer_id = ?
+                products
+            INNER JOIN cart 
+            ON 
+                products.prdid = cart.product_cart_id
+            WHERE 
+                cart.customer_id = ?
             ";
             $statement = $this->pdo->prepare($query);
-            $statement->execute([$id]);
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $statement->execute(array($id));
+            $result = $statement->fetchAll();
             $total=0;
             foreach ($result as $vari) {
                 $prix=number_format($vari['price'],2,'.','')*$vari['quantity'];
