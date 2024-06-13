@@ -140,6 +140,19 @@
             }
             $this->productsdisplayt($table);
         } 
+
+         function diplay_filter_price($mnipr,$maxpr,$idbr){
+
+          
+                 
+                $ins = $this->pdo->prepare("SELECT prdid, productname, price, imglink,categorie FROM products WHERE   brand_id = ? AND price BETWEEN ? AND ?");
+                $ins->setFetchMode(PDO::FETCH_ASSOC); 
+                $ins->execute(array($idbr,$mnipr,$maxpr));
+                $table = $ins->fetchAll();
+          
+         $this->productsdisplayt($table);
+        }
+
         function DisplayAll (){
             $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where prdid not in (select id from promotions) limit 8");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
@@ -149,6 +162,14 @@
         }
         function DisplayBrand ($idt){
             $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where brand_id = ? and prdid not in (select id from promotions) limit 8");
+            $ins->setFetchMode(PDO::FETCH_ASSOC); 
+            $ins->execute(array($idt));
+            $table = $ins->fetchAll();
+            $this->productsdisplayt($table);
+             
+        }
+        function DisplayBrandall ($idt){
+            $ins = $this->pdo->prepare("SELECT prdid, productname,price,imglink,categorie FROM products where brand_id = ? and prdid not in (select id from promotions)");
             $ins->setFetchMode(PDO::FETCH_ASSOC); 
             $ins->execute(array($idt));
             $table = $ins->fetchAll();
