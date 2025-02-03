@@ -14,3 +14,5 @@ Optimized for various devices for a smooth user experience.
 - Frontend: HTML, Tailwind CSS, JavaScript
 - Backend: PHP
 - Database: MySQL
+## Contributors
+- [Arroubi Youness](https://github.com/arroubi-youness)
