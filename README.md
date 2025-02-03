@@ -21,6 +21,6 @@ Optimized for various devices for a smooth user experience.
 - Backend: PHP
 - Database: MySQL
 ## 🎥 Demo : 
-[Watch demo](https://github.com/younessaitbenyssa/gamingstore/releases/download/demo/demo.mp4)
+[![Watch the Demo](https://github.com/user-attachments/assets/2cbd04fb-5e15-40c7-91f2-3e26cbcf25ea)](https://youtu.be/mEA5dbJmDjY)
 ## Contributors
 - [Arroubi Youness](https://github.com/arroubi-youness)
