@@ -20,7 +20,9 @@ Optimized for various devices for a smooth user experience.
 - Frontend: HTML, Tailwind CSS, JavaScript
 - Backend: PHP
 - Database: MySQL
+- Authentification: PHPMailer To verify the validity of the used Email
 ## 🎥 Demo : 
+### Play the video By Clicking on the Image 
 [![Watch the Demo](https://github.com/user-attachments/assets/2cbd04fb-5e15-40c7-91f2-3e26cbcf25ea)](https://youtu.be/mEA5dbJmDjY)
 ## Contributors
 - [Arroubi Youness](https://github.com/arroubi-youness)
